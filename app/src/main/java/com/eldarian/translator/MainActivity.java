@@ -7,9 +7,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText textOut;
     private EditText textIn;
     private Button buttonGo;
+
+    private String lang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +37,31 @@ public class MainActivity extends AppCompatActivity {
         textOut = (EditText) findViewById(R.id.text_out);
         textIn = (EditText) findViewById(R.id.text_in);
         buttonGo = (Button)findViewById(R.id.button_go);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.lang_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        langOut.setAdapter(adapter);
+        langIn.setAdapter(adapter);
+
+        langIn.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                lang = parent.getItemAtPosition(position).toString();
+            }
+        });
+
+
+        JSONObject translateText = new JSONObject();
+        try {
+            translateText.put("text", textOut.getText().toString());
+            translateText.put("lang", lang);
+            translateText.put("format", "plain");
+            translateText.put("options", 0);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     @Override

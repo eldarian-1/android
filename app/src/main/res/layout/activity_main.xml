@@ -1,56 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
     android:background="#fafcff"
     android:textColor="#002838"
     tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Язык переводимого текста"/>
 
     <Spinner
         android:id="@+id/lang_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/text_out"/>
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Переводимый текст"
+        android:layout_marginTop="10dp"/>
 
     <EditText
         android:id="@+id/text_out"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:inputType="textLongMessage"
-        app:layout_constraintTop_toTopOf="@id/lang_out"
-        app:layout_constraintBottom_toBottomOf="@id/lang_in"/>
+        android:background="@drawable/edit_text_style"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Язык перевода"
+        android:layout_marginTop="10dp"/>
 
     <Spinner
         android:id="@+id/lang_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/text_out"
-        app:layout_constraintBottom_toBottomOf="@id/text_in"/>
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Перевод"
+        android:layout_marginTop="10dp"/>
 
     <EditText
         android:id="@+id/text_in"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/lang_in"
-        app:layout_constraintBottom_toBottomOf="@id/button_go"/>
+        android:layout_height="150dp"
+        android:background="@drawable/edit_text_style"
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:id="@+id/button_go"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Перевести"
-        app:layout_constraintTop_toTopOf="@id/text_in"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         android:paddingHorizontal="15dp"
-        android:shadowDx="@android:integer/config_shortAnimTime"
-        android:shadowDy="@android:integer/config_shortAnimTime"
-        android:background="#e0e8ff"/>
+        android:background="#e0e8ff"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
