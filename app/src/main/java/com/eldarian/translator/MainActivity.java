@@ -13,19 +13,21 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements  AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private Spinner langOut;
     private Spinner langIn;
     private EditText textOut;
     private EditText textIn;
     private Button buttonGo;
-
-    private String lang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,30 +40,14 @@ public class MainActivity extends AppCompatActivity {
         textIn = (EditText) findViewById(R.id.text_in);
         buttonGo = (Button)findViewById(R.id.button_go);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.lang_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        langOut.setAdapter(adapter);
-        langIn.setAdapter(adapter);
+        langOut.setOnItemSelectedListener(this);
+        langIn.setOnItemSelectedListener(this);
 
-        langIn.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                lang = parent.getItemAtPosition(position).toString();
-            }
-        });
+        Spinner spinner = (Spinner) findViewById(R.id.lang_out);
+        String selected = spinner.getSelectedItem().toString();
+        Toast.makeText(getApplicationContext(), selected, Toast.LENGTH_SHORT).show();
 
-
-        JSONObject translateText = new JSONObject();
-        try {
-            translateText.put("text", textOut.getText().toString());
-            translateText.put("lang", lang);
-            translateText.put("format", "plain");
-            translateText.put("options", 0);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
+        buttonGo.setOnClickListener(this);
     }
 
     @Override
@@ -83,4 +69,58 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.button_go:{
+                String[] choose = getResources().getStringArray(R.array.lang_code);
+
+                String query = Translator.API_URI + "?";
+                query += "key=" + Translator.API_KEY + "&";
+                query += "text=" + textOut.getText().toString() + "&";
+                query += "lang=" + choose[langOut.getSelectedItemPosition()] + "-" + choose[langIn.getSelectedItemPosition()] + "&";
+                query += "format=plain";
+
+                try {
+                    URL url = new URL(query);
+                    HttpURLConnection c = (HttpURLConnection)url.openConnection();
+                    c.setRequestMethod("GET");
+                    c.setReadTimeout(20000);
+                    c.connect();
+
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (ProtocolException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                Toast.makeText(getApplicationContext(), "Ваш выбор: " + choose[langOut.getSelectedItemPosition()], Toast.LENGTH_SHORT).show();
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+        String[] choose = getResources().getStringArray(R.array.lang_code);
+        //Toast toast = Toast.makeText(getApplicationContext(), v.getId() + " " + R.id.lang_out + " " + R.id.lang_in);
+        switch (v.getId()){
+            case R.id.lang_out:{
+                Toast toast = Toast.makeText(getApplicationContext(), "Ваш выбор: " + choose[position], Toast.LENGTH_SHORT);
+                toast.show();
+                break;
+            }
+            case R.id.lang_in:{
+                Toast toast = Toast.makeText(getApplicationContext(), "Ваш выбор: " + choose[position], Toast.LENGTH_SHORT);
+                toast.show();
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+    }
 }

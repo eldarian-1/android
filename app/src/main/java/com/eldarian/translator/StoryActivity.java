@@ -27,7 +27,8 @@ public class StoryActivity extends AppCompatActivity {
 
         switch(item.getItemId()){
             case R.id.to_main:{
-                finish();
+                Intent intent = new Intent(StoryActivity.this, MainActivity.class);
+                startActivity(intent);
                 break;
             }
         }
