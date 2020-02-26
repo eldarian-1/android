@@ -4,22 +4,27 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.HttpURLConnection;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity implements  AdapterView.OnItemSelectedListener, View.OnClickListener {
 
@@ -34,16 +39,16 @@ public class MainActivity extends AppCompatActivity implements  AdapterView.OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        langOut = (Spinner)findViewById(R.id.lang_out);
-        langIn = (Spinner)findViewById(R.id.lang_in);
-        textOut = (EditText) findViewById(R.id.text_out);
-        textIn = (EditText) findViewById(R.id.text_in);
-        buttonGo = (Button)findViewById(R.id.button_go);
+        langOut = findViewById(R.id.lang_out);
+        langIn = findViewById(R.id.lang_in);
+        textOut = findViewById(R.id.text_out);
+        textIn = findViewById(R.id.text_in);
+        buttonGo = findViewById(R.id.button_go);
 
         langOut.setOnItemSelectedListener(this);
         langIn.setOnItemSelectedListener(this);
 
-        Spinner spinner = (Spinner) findViewById(R.id.lang_out);
+        Spinner spinner = findViewById(R.id.lang_out);
         String selected = spinner.getSelectedItem().toString();
         Toast.makeText(getApplicationContext(), selected, Toast.LENGTH_SHORT).show();
 
@@ -73,30 +78,7 @@ public class MainActivity extends AppCompatActivity implements  AdapterView.OnIt
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.button_go:{
-                String[] choose = getResources().getStringArray(R.array.lang_code);
-
-                String query = Translator.API_URI + "?";
-                query += "key=" + Translator.API_KEY + "&";
-                query += "text=" + textOut.getText().toString() + "&";
-                query += "lang=" + choose[langOut.getSelectedItemPosition()] + "-" + choose[langIn.getSelectedItemPosition()] + "&";
-                query += "format=plain";
-
-                try {
-                    URL url = new URL(query);
-                    HttpURLConnection c = (HttpURLConnection)url.openConnection();
-                    c.setRequestMethod("GET");
-                    c.setReadTimeout(20000);
-                    c.connect();
-
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (ProtocolException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                Toast.makeText(getApplicationContext(), "Ваш выбор: " + choose[langOut.getSelectedItemPosition()], Toast.LENGTH_SHORT).show();
+                new TranslateTask().execute();
                 break;
             }
         }
@@ -122,5 +104,62 @@ public class MainActivity extends AppCompatActivity implements  AdapterView.OnIt
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+    }
+
+    private class TranslateTask extends AsyncTask<Void, Void, String> {
+
+        private String query;
+
+        public TranslateTask() {
+            String[] choose = getResources().getStringArray(R.array.lang_code);
+            query = Translator.API_URI + "?";
+            query += "key=" + Translator.API_KEY + "&";
+            query += "text=" + textOut.getText().toString() + "&";
+            query += "lang=" + choose[langOut.getSelectedItemPosition()] + "-" + choose[langIn.getSelectedItemPosition()] + "&";
+            query += "format=plain";
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            String content = getContent(query);
+            return content;
+        }
+
+        protected void onPostExecute(String content) {
+            try {
+                JSONObject json = new JSONObject(content);
+                System.out.println(json.toString());
+                String temp = json.getJSONObject("text").toString();
+                System.out.println(temp);
+                textIn.setText(temp);
+                System.out.println(content);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        private String getContent(String path) {
+            try {
+                URL url = new URL(path);
+                HttpsURLConnection c = (HttpsURLConnection) url.openConnection();
+                c.setRequestMethod("GET");
+                c.setReadTimeout(20000);
+                c.connect();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(c.getInputStream()));
+                String content = "";
+                String line = "";
+                while ((line = reader.readLine()) != null) {
+                    content += line + "\n";
+                }
+                System.out.println(content);
+                return content;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return "";
+        }
+
     }
 }

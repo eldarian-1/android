@@ -16,7 +16,7 @@
         android:id="@+id/text_lang_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Язык переводимого текста"/>
+        android:text="@string/text_lang_out"/>
 
     <Spinner
         android:id="@+id/lang_out"
@@ -25,25 +25,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"/>
 
-    <TextView
-        android:id="@+id/text_text_out"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Переводимый текст"
-        android:layout_marginTop="15dp"/>
-
     <EditText
         android:id="@+id/text_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textLongMessage"
+        android:hint="@string/text_out"
         android:layout_marginTop="15dp"/>
 
     <TextView
         android:id="@+id/text_lang_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Язык перевода"
+        android:text="@string/text_lang_in"
         android:layout_marginTop="15dp"/>
 
     <Spinner
@@ -53,17 +47,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"/>
 
-    <TextView
-        android:id="@+id/text_text_in"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Перевод"
-        android:layout_marginTop="15dp"/>
-
     <EditText
         android:id="@+id/text_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/text_in"
         android:layout_marginTop="15dp"/>
 
     <Button
@@ -71,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Перевести"
+        android:text="@string/button_go"
         android:paddingHorizontal="15dp"
         android:shadowDx="@android:integer/config_shortAnimTime"
         android:shadowDy="@android:integer/config_shortAnimTime"

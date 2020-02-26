@@ -1,12 +1,16 @@
 <resources>
+
     <string name="app_name">Translator</string>
 
+    <string name="text_lang_out">Язык переводимого текста</string>
+    <string name="text_out">Переводимый текст</string>
+    <string name="text_lang_in">Язык перевода</string>
+    <string name="text_in">Перевод</string>
+    <string name="button_go">Перевести</string>
+
     <string-array name="lang_code">
-        <item name="ru">Russian</item>
-        <item name="uk">Ukraine</item>
-        <item name="bl">Belarus</item>
-        <item name="en">English</item>
-        <item name="de">Deutche</item>
+        <item name="ru">ru</item>
+        <item name="en">en</item>
     </string-array>
 
 </resources>
