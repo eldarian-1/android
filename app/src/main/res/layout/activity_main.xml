@@ -10,7 +10,7 @@
     android:orientation="vertical"
     android:layout_gravity="center_vertical"
     android:paddingHorizontal="15dp"
-    tools:context=".MainActivity">
+    tools:context=".presentation.MainActivity">
 
     <TextView
         android:id="@+id/text_lang_out"

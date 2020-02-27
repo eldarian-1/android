@@ -1,4 +1,4 @@
-package com.eldarian.translator.renderer;
+package com.eldarian.translator.presentation.renderer;
 
 import java.util.ArrayList;
 

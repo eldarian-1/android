@@ -1,4 +1,4 @@
-package com.eldarian.translator;
+package com.eldarian.translator.presentation;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,7 +9,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.eldarian.translator.renderer.TranslationsRender;
+import com.eldarian.translator.R;
+import com.eldarian.translator.presentation.renderer.TranslationsRender;
 
 public class StoryActivity extends AppCompatActivity {
 

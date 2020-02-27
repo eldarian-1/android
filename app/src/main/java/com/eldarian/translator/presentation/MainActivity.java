@@ -1,4 +1,4 @@
-package com.eldarian.translator;
+package com.eldarian.translator.presentation;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +15,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.eldarian.translator.renderer.Translator;
+import com.eldarian.translator.R;
+import com.eldarian.translator.presentation.renderer.Translator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
