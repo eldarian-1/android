@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.eldarian.translator.renderer.Translator;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 

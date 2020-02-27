@@ -2,18 +2,25 @@ package com.eldarian.translator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.eldarian.translator.renderer.TranslationsRender;
+
 public class StoryActivity extends AppCompatActivity {
 
+    private RecyclerView recycler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story);
+        recycler = findViewById(R.id.recycler);
+        recycler.setAdapter(new TranslationsRender());
+        recycler.setLayoutManager(recycler.getLayoutManager());
     }
 
     @Override
