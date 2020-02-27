@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.eldarian.translator.R;
-import com.eldarian.translator.StoryActivity;
 
 import java.util.List;
 
