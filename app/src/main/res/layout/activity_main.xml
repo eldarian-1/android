@@ -10,7 +10,7 @@
     android:orientation="vertical"
     android:layout_gravity="center_vertical"
     android:paddingHorizontal="15dp"
-    tools:context=".presentation.MainActivity">
+    tools:context=".presentation.translator.TranslatorActivity">
 
     <TextView
         android:id="@+id/text_lang_out"
@@ -27,6 +27,7 @@
 
     <EditText
         android:id="@+id/text_out"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textLongMessage"

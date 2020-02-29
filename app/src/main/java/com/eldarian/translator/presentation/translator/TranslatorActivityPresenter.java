@@ -1,4 +1,4 @@
-package com.eldarian.translator.presentation;
+package com.eldarian.translator.presentation.translator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.eldarian.translator.R;
+import com.eldarian.translator.presentation.story.StoryActivity;
 import com.eldarian.translator.presentation.renderer.Translator;
 
 import org.json.JSONException;
@@ -29,7 +30,7 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class MainActivity extends AppCompatActivity implements  AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class TranslatorActivityPresenter implements  TranslatorView{
 
     private Spinner langOut;
     private Spinner langIn;
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements  AdapterView.OnIt
 
         switch(item.getItemId()){
             case R.id.item_story:{
-                Intent intent = new Intent(MainActivity.this, StoryActivity.class);
+                Intent intent = new Intent(TranslatorActivity.this, StoryActivity.class);
                 startActivity(intent);
                 break;
             }

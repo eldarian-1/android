@@ -1,4 +1,4 @@
-package com.eldarian.translator.presentation;
+package com.eldarian.translator.presentation.story;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.eldarian.translator.R;
 import com.eldarian.translator.presentation.renderer.TranslationsRender;
+import com.eldarian.translator.presentation.translator.TranslatorActivity;
 
 public class StoryActivity extends AppCompatActivity {
 
@@ -35,7 +36,7 @@ public class StoryActivity extends AppCompatActivity {
 
         switch(item.getItemId()){
             case R.id.to_main:{
-                Intent intent = new Intent(StoryActivity.this, MainActivity.class);
+                Intent intent = new Intent(StoryActivity.this, TranslatorActivity.class);
                 startActivity(intent);
                 break;
             }
