@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.eldarian.translator.R;
+import com.eldarian.translator.presentation.QueryYandex;
 import com.eldarian.translator.presentation.story.StoryActivity;
 import com.eldarian.translator.presentation.renderer.Translator;
 
@@ -30,7 +31,10 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class TranslatorActivity extends AppCompatActivity implements  AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class TranslatorActivity extends AppCompatActivity implements TranslatorView {
+
+    private TranslatorActivityPresenter presenter;
+    private TranslatorModel model;
 
     private Spinner langOut;
     private Spinner langIn;
@@ -41,8 +45,11 @@ public class TranslatorActivity extends AppCompatActivity implements  AdapterVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_translator);
+        init();
+    }
 
+    private void init(){
         langOut = findViewById(R.id.lang_out);
         langIn = findViewById(R.id.lang_in);
         textOut = findViewById(R.id.text_out);
@@ -51,12 +58,19 @@ public class TranslatorActivity extends AppCompatActivity implements  AdapterVie
 
         langOut.setOnItemSelectedListener(this);
         langIn.setOnItemSelectedListener(this);
+        buttonGo.setOnClickListener(this);
 
-        Spinner spinner = findViewById(R.id.lang_out);
-        String selected = spinner.getSelectedItem().toString();
+        String selected = langOut.getSelectedItem().toString();
         Toast.makeText(getApplicationContext(), selected, Toast.LENGTH_SHORT).show();
 
-        buttonGo.setOnClickListener(this);
+        model = new TranslatorModel();
+        presenter = new TranslatorActivityPresenter(model);
+        presenter.attachView(this);
+        presenter.viewIsReady();
+    }
+
+    public void setText(String text){
+        textOut.setText(text);
     }
 
     @Override
@@ -82,7 +96,9 @@ public class TranslatorActivity extends AppCompatActivity implements  AdapterVie
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.button_go:{
-                new TranslateTask().execute();
+                new QueryYandex(this, getResources(), textOut.getText().toString(),
+                        langOut.getSelectedItemPosition(),
+                        langIn.getSelectedItemPosition()).execute();
                 break;
             }
         }
@@ -107,63 +123,9 @@ public class TranslatorActivity extends AppCompatActivity implements  AdapterVie
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
     }
 
-    private class TranslateTask extends AsyncTask<Void, Void, String> {
-
-        private String query;
-
-        public TranslateTask() {
-            String[] choose = getResources().getStringArray(R.array.lang_code);
-            query = Translator.API_URI + "?";
-            query += "key=" + Translator.API_KEY + "&";
-            query += "text=" + textOut.getText().toString() + "&";
-            query += "lang=" + choose[langOut.getSelectedItemPosition()] + "-" + choose[langIn.getSelectedItemPosition()] + "&";
-            query += "format=plain";
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            String content = getContent(query);
-            return content;
-        }
-
-        protected void onPostExecute(String content) {
-            try {
-                JSONObject json = new JSONObject(content);
-                System.out.println(json.toString());
-                String temp = json.getJSONObject("text").toString();
-                System.out.println(temp);
-                textIn.setText(temp);
-                System.out.println(content);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        private String getContent(String path) {
-            try {
-                URL url = new URL(path);
-                HttpsURLConnection c = (HttpsURLConnection) url.openConnection();
-                c.setRequestMethod("GET");
-                c.setReadTimeout(20000);
-                c.connect();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(c.getInputStream()));
-                String content = "";
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    content += line + "\n";
-                }
-                System.out.println(content);
-                return content;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return "";
-        }
-
-    }
 }

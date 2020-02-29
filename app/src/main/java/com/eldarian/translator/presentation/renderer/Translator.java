@@ -1,27 +1,27 @@
 package com.eldarian.translator.presentation.renderer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Translator {
+public class Translator implements Serializable {
 
-    static public final String API_KEY = "trnsl.1.1.20200223T101151Z.f0b089fcc9cceaea.b8f54373181a5280fe6485a26d2e68a2e6475c92";
-    static public final String API_URI = "https://translate.yandex.net/api/v1.5/tr.json/getLangs";
+
 
     private String textIn;
     private String textOut;
     private String langIn;
     private String langOut;
 
-    Translator () { }
-    Translator (String langIn, String langOut, String textIn, String textOut) {
+    public Translator (String langIn, String langOut, String textIn, String textOut) {
         this.langIn = langIn;
         this.langOut = langOut;
         this.textIn = textIn;
         this.textOut = textOut;
     }
 
-    static ArrayList<Translator> getList(){
-        ArrayList<Translator> translations = new ArrayList<Translator>();
+    static List<Translator> getList(){
+        List<Translator> translations = new ArrayList<>();
         Translator temp = new Translator("En", "Ru", "Hello", "Privet");
         translations.add(temp);
         translations.add(temp);

@@ -1,8 +1,8 @@
 package com.eldarian.translator.presentation.translator;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,143 +27,30 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class TranslatorActivityPresenter implements  TranslatorView{
+public class TranslatorActivityPresenter {
 
-    private Spinner langOut;
-    private Spinner langIn;
-    private EditText textOut;
-    private EditText textIn;
-    private Button buttonGo;
+    private TranslatorActivity view;
+    private final TranslatorModel model;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        langOut = findViewById(R.id.lang_out);
-        langIn = findViewById(R.id.lang_in);
-        textOut = findViewById(R.id.text_out);
-        textIn = findViewById(R.id.text_in);
-        buttonGo = findViewById(R.id.button_go);
-
-        langOut.setOnItemSelectedListener(this);
-        langIn.setOnItemSelectedListener(this);
-
-        Spinner spinner = findViewById(R.id.lang_out);
-        String selected = spinner.getSelectedItem().toString();
-        Toast.makeText(getApplicationContext(), selected, Toast.LENGTH_SHORT).show();
-
-        buttonGo.setOnClickListener(this);
+    TranslatorActivityPresenter(TranslatorModel model){
+        this.model = model;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void attachView(TranslatorActivity view) {
+        view = view;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        switch(item.getItemId()){
-            case R.id.item_story:{
-                Intent intent = new Intent(TranslatorActivity.this, StoryActivity.class);
-                startActivity(intent);
-                break;
-            }
-        }
-        return true;
+    public void detachView() {
+        view = null;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.button_go:{
-                new TranslateTask().execute();
-                break;
-            }
-        }
+
+    public void viewIsReady() {
+        //loadUsers();
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-        String[] choose = getResources().getStringArray(R.array.lang_code);
-        //Toast toast = Toast.makeText(getApplicationContext(), v.getId() + " " + R.id.lang_out + " " + R.id.lang_in);
-        switch (v.getId()){
-            case R.id.lang_out:{
-                Toast toast = Toast.makeText(getApplicationContext(), "Ваш выбор: " + choose[position], Toast.LENGTH_SHORT);
-                toast.show();
-                break;
-            }
-            case R.id.lang_in:{
-                Toast toast = Toast.makeText(getApplicationContext(), "Ваш выбор: " + choose[position], Toast.LENGTH_SHORT);
-                toast.show();
-                break;
-            }
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-    }
-
-    private class TranslateTask extends AsyncTask<Void, Void, String> {
-
-        private String query;
-
-        public TranslateTask() {
-            String[] choose = getResources().getStringArray(R.array.lang_code);
-            query = Translator.API_URI + "?";
-            query += "key=" + Translator.API_KEY + "&";
-            query += "text=" + textOut.getText().toString() + "&";
-            query += "lang=" + choose[langOut.getSelectedItemPosition()] + "-" + choose[langIn.getSelectedItemPosition()] + "&";
-            query += "format=plain";
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            String content = getContent(query);
-            return content;
-        }
-
-        protected void onPostExecute(String content) {
-            try {
-                JSONObject json = new JSONObject(content);
-                System.out.println(json.toString());
-                String temp = json.getJSONObject("text").toString();
-                System.out.println(temp);
-                textIn.setText(temp);
-                System.out.println(content);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        private String getContent(String path) {
-            try {
-                URL url = new URL(path);
-                HttpsURLConnection c = (HttpsURLConnection) url.openConnection();
-                c.setRequestMethod("GET");
-                c.setReadTimeout(20000);
-                c.connect();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(c.getInputStream()));
-                String content = "";
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    content += line + "\n";
-                }
-                System.out.println(content);
-                return content;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return "";
-        }
-
-    }
 }

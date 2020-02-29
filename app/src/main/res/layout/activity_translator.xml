@@ -27,12 +27,9 @@
 
     <EditText
         android:id="@+id/text_out"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textLongMessage"
-        android:hint="@string/text_out"
-        android:layout_marginTop="15dp"/>
+        android:background="@drawable/edit_text_style"
+        style="@style/edit_text_style"
+        android:hint="@string/text_out"/>
 
     <TextView
         android:id="@+id/text_lang_in"
@@ -50,10 +47,9 @@
 
     <EditText
         android:id="@+id/text_in"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_in"
-        android:layout_marginTop="15dp"/>
+        android:background="@drawable/edit_text_style"
+        style="@style/edit_text_style"
+        android:hint="@string/text_in"/>
 
     <Button
         android:id="@+id/button_go"

@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
+
 import com.eldarian.translator.R;
 
 import java.util.List;
@@ -17,7 +19,7 @@ public class StoryAdapter extends ArrayAdapter<Translator> {
     private int layout;
     private List<Translator> translates;
 
-    public StoryAdapter(Context context, int resource, List<Translator> translates) {
+    public StoryAdapter(Context context, @LayoutRes int resource, List<Translator> translates) {
         super(context, resource, translates);
         this.translates = translates;
         this.layout = resource;
@@ -26,7 +28,7 @@ public class StoryAdapter extends ArrayAdapter<Translator> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View view=inflater.inflate(R.layout.item_stories, parent, false);
+        View view = inflater.inflate(R.layout.item_stories, parent, false);
 
         TextView textIn = view.findViewById(R.id.text_in);
         TextView textOut = view.findViewById(R.id.text_out);
