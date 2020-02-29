@@ -6,8 +6,6 @@ import java.util.List;
 
 public class Translator implements Serializable {
 
-
-
     private String textIn;
     private String textOut;
     private String langIn;
