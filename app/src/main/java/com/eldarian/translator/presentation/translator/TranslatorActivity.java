@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,22 +17,11 @@ import android.widget.Toast;
 import com.eldarian.translator.R;
 import com.eldarian.translator.presentation.QueryYandex;
 import com.eldarian.translator.presentation.story.StoryActivity;
-import com.eldarian.translator.presentation.renderer.Translator;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+public class TranslatorActivity extends AppCompatActivity
+        implements TranslatorView, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.net.ssl.HttpsURLConnection;
-
-public class TranslatorActivity extends AppCompatActivity implements TranslatorView {
-
-    private TranslatorActivityPresenter presenter;
+    private TranslatorPresenter presenter;
     private TranslatorModel model;
 
     private Spinner langOut;
@@ -64,7 +52,7 @@ public class TranslatorActivity extends AppCompatActivity implements TranslatorV
         Toast.makeText(getApplicationContext(), selected, Toast.LENGTH_SHORT).show();
 
         model = new TranslatorModel();
-        presenter = new TranslatorActivityPresenter(model);
+        presenter = new TranslatorPresenter(model);
         presenter.attachView(this);
         presenter.viewIsReady();
     }
@@ -121,6 +109,9 @@ public class TranslatorActivity extends AppCompatActivity implements TranslatorV
             }
         }
     }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {}
 
     @Override
     protected void onDestroy() {

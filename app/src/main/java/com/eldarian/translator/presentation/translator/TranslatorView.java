@@ -4,10 +4,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
-import androidx.annotation.NonNull;
-
-import java.util.List;
-
 public interface TranslatorView {
 
     //void onGetData(List<String> data);

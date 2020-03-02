@@ -13,16 +13,29 @@ import com.eldarian.translator.R;
 import com.eldarian.translator.presentation.renderer.TranslationsRender;
 import com.eldarian.translator.presentation.translator.TranslatorActivity;
 
-public class StoryActivity extends AppCompatActivity {
+public class StoryActivity extends AppCompatActivity implements StoryView {
+
+    private StoryPresenter presenter;
+    private StoryModel model;
 
     private RecyclerView recycler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story);
+        init();
+    }
+
+    private void init(){
         recycler = findViewById(R.id.recycler);
         recycler.setAdapter(new TranslationsRender());
         recycler.setLayoutManager(recycler.getLayoutManager());
+
+        model = new StoryModel();
+        presenter = new StoryPresenter(model);
+        presenter.attachView(this);
+        presenter.viewIsReady();
     }
 
     @Override
