@@ -1,9 +1,9 @@
-package com.eldarian.translator.presentation.story;
+package com.eldarian.translator.translator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StoryModel {
+public class TranslatorModel {
 
     List<String> getData(){
         ArrayList<String> data = new ArrayList<String>();

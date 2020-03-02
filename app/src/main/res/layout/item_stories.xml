@@ -3,24 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fafcff"
-    android:textColor="#002838">
+    android:layout_height="wrap_content"
+    android:background="@color/colorBackroundTranslator"
+    android:textColor="@color/colorTextTranslator">
 
     <TextView
         android:id="@+id/lang_out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="english"
-        android:background="#dde5ff"
-        android:textColor="#727a98"
+        style="@style/lang_style"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/text_out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/text_style"
         android:text="Hello World! Hello World! Hello World! Hello World! Hello World!"
         app:layout_constraintLeft_toLeftOf="parent"
         android:textColor="#002838"
@@ -28,20 +24,15 @@
 
     <TextView
         android:id="@+id/lang_in"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/lang_style"
         android:text="russian"
-        android:background="#dde5ff"
-        android:textColor="#727a98"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_out"/>
 
     <TextView
         android:id="@+id/text_in"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/text_style"
         android:text="Привет мир! Привет мир! Привет мир! Привет мир! Привет мир!"
-        android:textColor="#002838"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lang_in"/>
 

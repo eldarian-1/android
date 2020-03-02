@@ -14,9 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".presentation.story.StoryActivity"></activity>
+        <activity android:name=".story.StoryActivity"></activity>
 
-        <activity android:name=".presentation.translator.TranslatorActivity">
+        <activity android:name=".translator.TranslatorActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

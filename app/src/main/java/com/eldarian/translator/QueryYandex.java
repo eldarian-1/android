@@ -1,11 +1,11 @@
-package com.eldarian.translator.presentation;
+package com.eldarian.translator;
 
 import android.content.res.Resources;
 import android.os.AsyncTask;
 
 import com.eldarian.translator.DataApp;
 import com.eldarian.translator.R;
-import com.eldarian.translator.presentation.translator.TranslatorView;
+import com.eldarian.translator.translator.TranslatorView;
 
 import org.json.JSONException;
 import org.json.JSONObject;

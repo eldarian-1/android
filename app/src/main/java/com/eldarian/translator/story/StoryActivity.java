@@ -1,4 +1,4 @@
-package com.eldarian.translator.presentation.story;
+package com.eldarian.translator.story;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,8 +10,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.eldarian.translator.R;
-import com.eldarian.translator.presentation.renderer.TranslationsRender;
-import com.eldarian.translator.presentation.translator.TranslatorActivity;
+import com.eldarian.translator.renderer.StoryAdapter;
+import com.eldarian.translator.Translations;
+import com.eldarian.translator.translator.TranslatorActivity;
+
+import java.util.ArrayList;
 
 public class StoryActivity extends AppCompatActivity implements StoryView {
 
@@ -29,8 +32,17 @@ public class StoryActivity extends AppCompatActivity implements StoryView {
 
     private void init(){
         recycler = findViewById(R.id.recycler);
-        recycler.setAdapter(new TranslationsRender());
-        recycler.setLayoutManager(recycler.getLayoutManager());
+
+        ArrayList<Translations> translations = new ArrayList<Translations>();
+        Translations temp = new Translations("En", "Ru", "Hello", "Privet");
+        translations.add(temp);
+        translations.add(temp);
+        translations.add(temp);
+        translations.add(temp);
+        translations.add(temp);
+
+        StoryAdapter adapter = new StoryAdapter(this, translations);
+        recycler.setAdapter(adapter);
 
         model = new StoryModel();
         presenter = new StoryPresenter(model);

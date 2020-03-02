@@ -1,32 +1,21 @@
-package com.eldarian.translator.presentation.renderer;
+package com.eldarian.translator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Translator implements Serializable {
+public class Translations implements Serializable {
 
     private String textIn;
     private String textOut;
     private String langIn;
     private String langOut;
 
-    public Translator (String langIn, String langOut, String textIn, String textOut) {
+    public Translations(String langIn, String langOut, String textIn, String textOut) {
         this.langIn = langIn;
         this.langOut = langOut;
         this.textIn = textIn;
         this.textOut = textOut;
-    }
-
-    static List<Translator> getList(){
-        List<Translator> translations = new ArrayList<>();
-        Translator temp = new Translator("En", "Ru", "Hello", "Privet");
-        translations.add(temp);
-        translations.add(temp);
-        translations.add(temp);
-        translations.add(temp);
-        translations.add(temp);
-        return translations;
     }
 
     public String getTextIn() {

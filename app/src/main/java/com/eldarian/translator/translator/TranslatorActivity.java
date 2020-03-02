@@ -1,4 +1,4 @@
-package com.eldarian.translator.presentation.translator;
+package com.eldarian.translator.translator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,8 +15,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.eldarian.translator.R;
-import com.eldarian.translator.presentation.QueryYandex;
-import com.eldarian.translator.presentation.story.StoryActivity;
+import com.eldarian.translator.QueryYandex;
+import com.eldarian.translator.story.StoryActivity;
 
 public class TranslatorActivity extends AppCompatActivity
         implements TranslatorView, View.OnClickListener, AdapterView.OnItemSelectedListener {

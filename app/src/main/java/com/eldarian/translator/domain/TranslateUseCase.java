@@ -1,8 +1,8 @@
 package com.eldarian.translator.domain;
 
 import com.eldarian.translator.Language;
-import com.eldarian.translator.presentation.renderer.Translator;
+import com.eldarian.translator.Translations;
 
 public interface TranslateUseCase {
-    public Translator translate(String world, Language lang);
+    public Translations translate(String world, Language lang);
 }

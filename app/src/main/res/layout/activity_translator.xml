@@ -5,38 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#fafcff"
-    android:textColor="#002838"
+    android:background="@color/colorBackroundTranslator"
+    android:textColor="@color/colorTextTranslator"
     android:orientation="vertical"
     android:layout_gravity="center_vertical"
     android:paddingHorizontal="15dp"
-    tools:context=".presentation.translator.TranslatorActivity">
-
-    <TextView
-        android:id="@+id/text_lang_out"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/text_lang_out"/>
-
-    <Spinner
-        android:id="@+id/lang_out"
-        android:entries="@array/lang_code"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"/>
-
-    <EditText
-        android:id="@+id/text_out"
-        android:background="@drawable/edit_text_style"
-        style="@style/edit_text_style"
-        android:hint="@string/text_out"/>
+    tools:context=".translator.TranslatorActivity">
 
     <TextView
         android:id="@+id/text_lang_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/text_lang_in"
-        android:layout_marginTop="15dp"/>
+        android:text="@string/text_lang_out"/>
 
     <Spinner
         android:id="@+id/lang_in"
@@ -49,18 +29,32 @@
         android:id="@+id/text_in"
         android:background="@drawable/edit_text_style"
         style="@style/edit_text_style"
+        android:hint="@string/text_out"/>
+
+    <TextView
+        android:id="@+id/text_lang_out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_lang_in"
+        android:layout_marginTop="15dp"/>
+
+    <Spinner
+        android:id="@+id/lang_out"
+        android:entries="@array/lang_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:id="@+id/text_out"
+        android:background="@drawable/edit_text_style"
+        style="@style/edit_text_style"
         android:hint="@string/text_in"/>
 
     <Button
         android:id="@+id/button_go"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        style="@style/button_style"
         android:text="@string/button_go"
-        android:paddingHorizontal="15dp"
-        android:shadowDx="@android:integer/config_shortAnimTime"
-        android:shadowDy="@android:integer/config_shortAnimTime"
-        android:background="#e0e8ff"
         android:layout_marginTop="15dp"/>
 
 </LinearLayout>

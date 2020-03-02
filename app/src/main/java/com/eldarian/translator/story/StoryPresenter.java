@@ -1,4 +1,4 @@
-package com.eldarian.translator.presentation.story;
+package com.eldarian.translator.story;
 
 import androidx.appcompat.app.AppCompatActivity;
 
