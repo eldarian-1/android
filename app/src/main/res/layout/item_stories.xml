@@ -8,33 +8,33 @@
     android:textColor="@color/colorTextTranslator">
 
     <TextView
-        android:id="@+id/lang_out"
+        android:id="@+id/lang_in"
         android:text="english"
         style="@style/lang_style"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/text_out"
+        android:id="@+id/text_in"
         style="@style/text_style"
         android:text="Hello World! Hello World! Hello World! Hello World! Hello World!"
         app:layout_constraintLeft_toLeftOf="parent"
         android:textColor="#002838"
-        app:layout_constraintTop_toBottomOf="@id/lang_out"/>
+        app:layout_constraintTop_toBottomOf="@id/lang_in"/>
 
     <TextView
-        android:id="@+id/lang_in"
+        android:id="@+id/lang_out"
         style="@style/lang_style"
         android:text="russian"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_out"/>
+        app:layout_constraintTop_toBottomOf="@id/text_in"/>
 
     <TextView
-        android:id="@+id/text_in"
+        android:id="@+id/text_out"
         style="@style/text_style"
         android:text="Привет мир! Привет мир! Привет мир! Привет мир! Привет мир!"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lang_in"/>
+        app:layout_constraintTop_toBottomOf="@id/lang_out"/>
 
 
 

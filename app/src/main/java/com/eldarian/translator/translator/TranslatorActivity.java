@@ -15,8 +15,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.eldarian.translator.R;
-import com.eldarian.translator.QueryYandex;
 import com.eldarian.translator.story.StoryActivity;
+
+import java.io.IOException;
 
 public class TranslatorActivity extends AppCompatActivity
         implements TranslatorView, View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -24,10 +25,10 @@ public class TranslatorActivity extends AppCompatActivity
     private TranslatorPresenter presenter;
     private TranslatorModel model;
 
-    private Spinner langOut;
     private Spinner langIn;
-    private EditText textOut;
+    private Spinner langOut;
     private EditText textIn;
+    private EditText textOut;
     private Button buttonGo;
 
     @Override
@@ -38,27 +39,20 @@ public class TranslatorActivity extends AppCompatActivity
     }
 
     private void init(){
-        langOut = findViewById(R.id.lang_out);
         langIn = findViewById(R.id.lang_in);
-        textOut = findViewById(R.id.text_out);
+        langOut = findViewById(R.id.lang_out);
         textIn = findViewById(R.id.text_in);
+        textOut = findViewById(R.id.text_out);
         buttonGo = findViewById(R.id.button_go);
 
-        langOut.setOnItemSelectedListener(this);
         langIn.setOnItemSelectedListener(this);
+        langOut.setOnItemSelectedListener(this);
         buttonGo.setOnClickListener(this);
-
-        String selected = langOut.getSelectedItem().toString();
-        Toast.makeText(getApplicationContext(), selected, Toast.LENGTH_SHORT).show();
 
         model = new TranslatorModel();
         presenter = new TranslatorPresenter(model);
         presenter.attachView(this);
         presenter.viewIsReady();
-    }
-
-    public void setText(String text){
-        textOut.setText(text);
     }
 
     @Override
@@ -69,11 +63,14 @@ public class TranslatorActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         switch(item.getItemId()){
             case R.id.item_story:{
                 Intent intent = new Intent(TranslatorActivity.this, StoryActivity.class);
                 startActivity(intent);
+                break;
+            }
+            case R.id.cl_field:{
+                clearField();
                 break;
             }
         }
@@ -84,9 +81,11 @@ public class TranslatorActivity extends AppCompatActivity
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.button_go:{
-                new QueryYandex(this, getResources(), textOut.getText().toString(),
-                        langOut.getSelectedItemPosition(),
-                        langIn.getSelectedItemPosition()).execute();
+                try {
+                    presenter.pushQuery();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             }
         }
@@ -94,20 +93,19 @@ public class TranslatorActivity extends AppCompatActivity
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-        String[] choose = getResources().getStringArray(R.array.lang_code);
-        //Toast toast = Toast.makeText(getApplicationContext(), v.getId() + " " + R.id.lang_out + " " + R.id.lang_in);
-        switch (v.getId()){
-            case R.id.lang_out:{
-                Toast toast = Toast.makeText(getApplicationContext(), "Ваш выбор: " + choose[position], Toast.LENGTH_SHORT);
-                toast.show();
-                break;
-            }
-            case R.id.lang_in:{
-                Toast toast = Toast.makeText(getApplicationContext(), "Ваш выбор: " + choose[position], Toast.LENGTH_SHORT);
-                toast.show();
-                break;
-            }
-        }
+//        String[] choose = getResources().getStringArray(R.array.lang_code);
+//        switch (parent.getId()){
+//            case R.id.lang_in:{
+//                Toast toast = Toast.makeText(getApplicationContext(), "Ваш выбор: " + choose[position], Toast.LENGTH_SHORT);
+//                toast.show();
+//                break;
+//            }
+//            case R.id.lang_out:{
+//                Toast toast = Toast.makeText(getApplicationContext(), "Ваш выбор: " + choose[position], Toast.LENGTH_SHORT);
+//                toast.show();
+//                break;
+//            }
+//        }
     }
 
     @Override
@@ -117,6 +115,41 @@ public class TranslatorActivity extends AppCompatActivity
     protected void onDestroy() {
         super.onDestroy();
         presenter.detachView();
+    }
+
+    @Override
+    public void setTextIn(String text){
+        textIn.setText(text);
+    }
+
+    @Override
+    public void setTextOut(String text){
+        textOut.setText(text);
+    }
+
+    @Override
+    public String getTextIn() {
+        return textIn.getText().toString();
+    }
+
+    @Override
+    public String getLangIn() {
+        String[] choose = getResources().getStringArray(R.array.lang_code);
+        return choose[langIn.getSelectedItemPosition()];
+    }
+
+    @Override
+    public String getLangOut() {
+        String[] choose = getResources().getStringArray(R.array.lang_code);
+        return choose[langOut.getSelectedItemPosition()];
+    }
+
+    @Override
+    public void clearField() {
+        langIn.setSelection(0);
+        langOut.setSelection(0);
+        textIn.setText("");
+        textOut.setText("");
     }
 
 }
