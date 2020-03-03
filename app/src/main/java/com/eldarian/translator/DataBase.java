@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import static com.eldarian.translator.story.StoryView.DataApp.CREATE_DB;
+import static com.eldarian.translator.DataApp.CREATE_DB;
 
 public class DataBase {
 
