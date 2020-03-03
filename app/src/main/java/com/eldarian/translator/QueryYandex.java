@@ -2,6 +2,7 @@ package com.eldarian.translator;
 
 import android.os.AsyncTask;
 
+import com.eldarian.translator.story.StoryView;
 import com.eldarian.translator.translator.TranslatorPresenter;
 
 import org.json.JSONException;
@@ -26,9 +27,9 @@ public class QueryYandex {
 
         text = URLEncoder.encode(textIn, "UTF-8");
 
-        query = DataApp.API_URI + "?";
+        query = StoryView.DataApp.API_URI + "?";
         query += "lang=" + langIn + "-" + langOut + "&";
-        query += "key=" + DataApp.API_KEY + "&";
+        query += "key=" + StoryView.DataApp.API_KEY + "&";
         query += "text=" + text;
 
         System.out.println(query);

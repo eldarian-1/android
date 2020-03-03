@@ -1,6 +1,7 @@
 package com.eldarian.translator.translator;
 
 import com.eldarian.translator.QueryYandex;
+import com.eldarian.translator.Translations;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,7 +24,9 @@ public class TranslatorPresenter {
 
     public void setTextOut(String text) throws JSONException {
         JSONObject json = new JSONObject(text);
-        view.setTextOut(json.getJSONArray("text").getString(0));
+        String textOut = json.getJSONArray("text").getString(0);
+        model.addTranslate(new Translations(view.getLangIn(), view.getLangOut(), view.getTextIn(), textOut));
+        view.setTextOut(textOut);
     }
 
     public void viewIsReady() {

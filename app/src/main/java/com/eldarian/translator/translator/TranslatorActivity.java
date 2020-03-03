@@ -8,19 +8,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.eldarian.translator.R;
+import com.eldarian.translator.Translations;
 import com.eldarian.translator.story.StoryActivity;
 
 import java.io.IOException;
 
 public class TranslatorActivity extends AppCompatActivity
-        implements TranslatorView, View.OnClickListener, AdapterView.OnItemSelectedListener {
+        implements TranslatorView, View.OnClickListener {
 
     private TranslatorPresenter presenter;
     private TranslatorModel model;
@@ -45,11 +44,9 @@ public class TranslatorActivity extends AppCompatActivity
         textOut = findViewById(R.id.text_out);
         buttonGo = findViewById(R.id.button_go);
 
-        langIn.setOnItemSelectedListener(this);
-        langOut.setOnItemSelectedListener(this);
         buttonGo.setOnClickListener(this);
 
-        model = new TranslatorModel();
+        model = new TranslatorModel(this);
         presenter = new TranslatorPresenter(model);
         presenter.attachView(this);
         presenter.viewIsReady();
@@ -90,26 +87,6 @@ public class TranslatorActivity extends AppCompatActivity
             }
         }
     }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-//        String[] choose = getResources().getStringArray(R.array.lang_code);
-//        switch (parent.getId()){
-//            case R.id.lang_in:{
-//                Toast toast = Toast.makeText(getApplicationContext(), "Ваш выбор: " + choose[position], Toast.LENGTH_SHORT);
-//                toast.show();
-//                break;
-//            }
-//            case R.id.lang_out:{
-//                Toast toast = Toast.makeText(getApplicationContext(), "Ваш выбор: " + choose[position], Toast.LENGTH_SHORT);
-//                toast.show();
-//                break;
-//            }
-//        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {}
 
     @Override
     protected void onDestroy() {

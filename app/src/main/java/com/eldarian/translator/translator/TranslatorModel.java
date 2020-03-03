@@ -1,15 +1,23 @@
 package com.eldarian.translator.translator;
 
+import android.content.Context;
+
+import com.eldarian.translator.DataBase;
+import com.eldarian.translator.Translations;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TranslatorModel {
 
-    List<String> getData(){
-        ArrayList<String> data = new ArrayList<String>();
-        data.add("Hello world!");
-        data.add("My name is Eldar");
-        return data;
+    private DataBase db;
+
+    TranslatorModel(Context context){
+        db = new DataBase(context);
+    }
+
+    public void addTranslate(Translations translate){
+        db.addTranslate(translate);
     }
 
 }
