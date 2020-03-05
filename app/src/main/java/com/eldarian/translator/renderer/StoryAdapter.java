@@ -1,6 +1,5 @@
 package com.eldarian.translator.renderer;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,18 +15,18 @@ import java.util.List;
 
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> {
 
-    private LayoutInflater inflater;
     private List<Translations> translates;
 
-    public StoryAdapter(Context context, List<Translations> translates) {
+    public StoryAdapter(List<Translations> translates) {
         this.translates = translates;
-        this.inflater = LayoutInflater.from(context);
     }
 
     @NonNull
     @Override
     public StoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_stories, parent, false);
+        View view = LayoutInflater.from(
+                parent.getContext()).inflate(R.layout.item_stories, parent, false
+        );
         return new ViewHolder(view);
     }
 
@@ -46,8 +45,10 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
         TextView langIn, langOut, textIn, textOut;
-        ViewHolder(View view){
+
+        ViewHolder(View view) {
             super(view);
             langIn = view.findViewById(R.id.lang_in);
             langOut = view.findViewById(R.id.lang_out);

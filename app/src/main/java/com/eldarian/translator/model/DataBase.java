@@ -44,7 +44,7 @@ public class DataBase {
     public void clearTranslations(Context context){
         System.out.println("DROP TABLE IF EXISTS translations;");
         if(!db.isOpen())
-            db = context.openOrCreateDatabase("app.db", context.MODE_PRIVATE, null);
+            db = context.openOrCreateDatabase("app.db", Context.MODE_PRIVATE, null);
         db.execSQL("DROP TABLE IF EXISTS translations;");
         db.close();
     }

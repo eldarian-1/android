@@ -17,7 +17,6 @@ import java.util.ArrayList;
 public class StoryActivity extends AppCompatActivity implements StoryView {
 
     private StoryPresenter presenter;
-    private StoryModel model;
 
     private RecyclerView recycler;
 
@@ -29,23 +28,7 @@ public class StoryActivity extends AppCompatActivity implements StoryView {
     }
 
     private void init(){
-        recycler = findViewById(R.id.recycler);
-
-//        ArrayList<Translations> translations = new ArrayList<Translations>();
-//        translations.add(new Translations("En", "Ru", "Hello World!", "Привет Мир!"));
-//        translations.add(new Translations("En", "Ru", "My name is Eldar.", "Меня зовут Эльдар."));
-//        translations.add(new Translations("En", "Ru", "Hello World!", "Привет Мир!"));
-//        translations.add(new Translations("En", "Ru", "My name is Eldar.", "Меня зовут Эльдар."));
-//        translations.add(new Translations("En", "Ru", "Hello World!", "Привет Мир!"));
-//        translations.add(new Translations("En", "Ru", "My name is Eldar.", "Меня зовут Эльдар."));
-//        translations.add(new Translations("En", "Ru", "Hello World!", "Привет Мир!"));
-//        translations.add(new Translations("En", "Ru", "My name is Eldar.", "Меня зовут Эльдар."));
-//
-//        StoryAdapter adapter = new StoryAdapter(this, translations);
-//        recycler.setAdapter(adapter);
-
-        model = new StoryModel(this);
-        presenter = new StoryPresenter(model);
+        presenter = new StoryPresenter(new StoryModel(this));
         presenter.attachView(this);
         presenter.viewIsReady();
         setTranslationsList();
@@ -67,7 +50,7 @@ public class StoryActivity extends AppCompatActivity implements StoryView {
             }
             case R.id.cl_story:{
                 ArrayList<Translations> empty = new ArrayList<Translations>();
-                StoryAdapter adapter = new StoryAdapter(this, empty);
+                StoryAdapter adapter = new StoryAdapter(empty);
                 recycler.setAdapter(adapter);
                 presenter.clearTranslations(this);
                 break;
@@ -78,7 +61,7 @@ public class StoryActivity extends AppCompatActivity implements StoryView {
 
     public void setTranslationsList(){
         System.out.println("Hello world!");
-        StoryAdapter adapter = new StoryAdapter(this, presenter.getTranslationsList());
+        StoryAdapter adapter = new StoryAdapter(presenter.getTranslationsList());
         recycler.setAdapter(adapter);
     }
 

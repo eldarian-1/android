@@ -14,10 +14,10 @@ public class StoryModel {
         db = new DataBase(context);
     }
 
-    public List<Translations> getTranslationsList(){
+    List<Translations> getTranslationsList(){
         return db.getTranslationsList();
     }
-    public void clearTranslations(Context context){
+    void clearTranslations(Context context){
         db.clearTranslations(context);
     }
 

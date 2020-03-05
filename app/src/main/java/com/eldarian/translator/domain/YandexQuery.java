@@ -1,6 +1,8 @@
 package com.eldarian.translator.domain;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.eldarian.translator.model.AppData;
 import com.eldarian.translator.presentation.translator.TranslatorPresenter;
@@ -20,7 +22,6 @@ public class YandexQuery implements TranslateUseCase {
 
     private String query;
     private String text;
-    private TranslatorPresenter presenter;
 
     public YandexQuery(String textIn, String langIn, String langOut, TranslatorPresenter presenter)
             throws UnsupportedEncodingException {
@@ -31,9 +32,6 @@ public class YandexQuery implements TranslateUseCase {
         query += "lang=" + langIn + "-" + langOut + "&";
         query += "key=" + AppData.API_KEY + "&";
         query += "text=" + text;
-
-        System.out.println(query);
-        this.presenter = presenter;
     }
 
     public String getQuery() {
@@ -45,6 +43,7 @@ public class YandexQuery implements TranslateUseCase {
         new ProgressTask().execute();
     }
 
+    @SuppressLint("StaticFieldLeak")
     class ProgressTask extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... path) {
@@ -60,11 +59,6 @@ public class YandexQuery implements TranslateUseCase {
 
         @Override
         protected void onPostExecute(String content) {
-            try {
-                presenter.setTextOut(content);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
         }
 
         private String getContent(String path) throws IOException {

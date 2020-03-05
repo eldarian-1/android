@@ -10,10 +10,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:paddingHorizontal">15dp</item>
         <item name="android:background">@color/colorButtonTranslator</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:background">@color/colorBackroundTranslator</item>
         <item name="android:textColor">@color/colorTextTranslator</item>
     </style>
 
@@ -21,7 +19,6 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:paddingHorizontal">15dp</item>
         <item name="android:background">@color/colorButtonTranslator</item>
     </style>
 

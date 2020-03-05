@@ -21,7 +21,6 @@ public class TranslatorActivity extends AppCompatActivity
         implements TranslatorView, View.OnClickListener {
 
     private TranslatorPresenter presenter;
-    private TranslatorModel model;
 
     private Spinner langIn;
     private Spinner langOut;
@@ -45,8 +44,7 @@ public class TranslatorActivity extends AppCompatActivity
 
         buttonGo.setOnClickListener(this);
 
-        model = new TranslatorModel(this);
-        presenter = new TranslatorPresenter(model);
+        presenter = new TranslatorPresenter(new TranslatorModel(this));
         presenter.attachView(this);
         presenter.viewIsReady();
     }

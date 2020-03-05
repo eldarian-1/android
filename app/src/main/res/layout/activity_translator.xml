@@ -41,7 +41,7 @@
     <EditText
         android:id="@+id/text_out"
         style="@style/edit_text_style"
-        android:hint="@string/text_in"/>
+        android:hint="@string/text_in" />
 
     <Button
         android:id="@+id/button_go"

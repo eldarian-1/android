@@ -6,6 +6,6 @@ import androidx.room.RoomDatabase;
 @Database(entities = {Translate.class}, version = 1)
 public abstract class AppDataBase extends RoomDatabase {
 
-    public abstract TranslateDao employeeDao();
+    public abstract TranslateDao translateDao();
 
 }

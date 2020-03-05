@@ -8,27 +8,31 @@ import com.eldarian.translator.model.Translations;
 
 import java.util.List;
 
-public class StoryPresenter extends AppCompatActivity {
+public class StoryPresenter {
 
     private StoryView view;
     private StoryModel model;
 
-    StoryPresenter(StoryModel model){
+    StoryPresenter(StoryModel model) {
         this.model = model;
     }
-    public void attachView(StoryView view) {
-        view = view;
+
+    void attachView(StoryView view) {
+        this.view = view;
     }
+
     public void detachView() {
         view = null;
     }
-    public void viewIsReady() {}
 
-    public List<Translations> getTranslationsList()
-    {
+    void viewIsReady() {
+    }
+
+    List<Translations> getTranslationsList() {
         return model.getTranslationsList();
     }
-    public void clearTranslations(Context context){
+
+    void clearTranslations(Context context) {
         model.clearTranslations(context);
     }
 
