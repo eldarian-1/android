@@ -1,12 +1,9 @@
-package com.eldarian.translator.translator;
+package com.eldarian.translator.presentation.translator;
 
 import android.content.Context;
 
-import com.eldarian.translator.DataBase;
-import com.eldarian.translator.Translations;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.eldarian.translator.model.DataBase;
+import com.eldarian.translator.model.Translations;
 
 public class TranslatorModel {
 

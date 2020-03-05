@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.eldarian.translator.R;
-import com.eldarian.translator.Translations;
+import com.eldarian.translator.model.Translations;
 
 import java.util.List;
 

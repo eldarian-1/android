@@ -1,4 +1,4 @@
-package com.eldarian.translator.translator;
+package com.eldarian.translator.presentation.translator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.eldarian.translator.R;
-import com.eldarian.translator.Translations;
-import com.eldarian.translator.story.StoryActivity;
+import com.eldarian.translator.presentation.story.StoryActivity;
 
 import java.io.IOException;
 
@@ -67,7 +66,7 @@ public class TranslatorActivity extends AppCompatActivity
                 break;
             }
             case R.id.cl_field:{
-                clearField();
+                presenter.clearField();
                 break;
             }
         }
@@ -95,6 +94,16 @@ public class TranslatorActivity extends AppCompatActivity
     }
 
     @Override
+    public void setLangIn(int position){
+        langIn.setSelection(position);
+    }
+
+    @Override
+    public void setLangOut(int position){
+        langOut.setSelection(position);
+    }
+
+    @Override
     public void setTextIn(String text){
         textIn.setText(text);
     }
@@ -119,14 +128,6 @@ public class TranslatorActivity extends AppCompatActivity
     public String getLangOut() {
         String[] choose = getResources().getStringArray(R.array.lang_code);
         return choose[langOut.getSelectedItemPosition()];
-    }
-
-    @Override
-    public void clearField() {
-        langIn.setSelection(0);
-        langOut.setSelection(0);
-        textIn.setText("");
-        textOut.setText("");
     }
 
 }

@@ -1,4 +1,4 @@
-package com.eldarian.translator.story;
+package com.eldarian.translator.presentation.story;
 
 import android.view.Menu;
 import android.view.MenuItem;

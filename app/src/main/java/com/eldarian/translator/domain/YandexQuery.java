@@ -1,8 +1,9 @@
-package com.eldarian.translator;
+package com.eldarian.translator.domain;
 
 import android.os.AsyncTask;
 
-import com.eldarian.translator.translator.TranslatorPresenter;
+import com.eldarian.translator.model.AppData;
+import com.eldarian.translator.presentation.translator.TranslatorPresenter;
 
 import org.json.JSONException;
 
@@ -15,20 +16,20 @@ import java.net.URLEncoder;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class QueryYandex {
+public class YandexQuery implements TranslateUseCase {
 
     private String query;
     private String text;
     private TranslatorPresenter presenter;
 
-    public QueryYandex(String textIn, String langIn, String langOut, TranslatorPresenter presenter)
+    public YandexQuery(String textIn, String langIn, String langOut, TranslatorPresenter presenter)
             throws UnsupportedEncodingException {
 
         text = URLEncoder.encode(textIn, "UTF-8");
 
-        query = DataApp.API_URI + "?";
+        query = AppData.API_URI + "?";
         query += "lang=" + langIn + "-" + langOut + "&";
-        query += "key=" + DataApp.API_KEY + "&";
+        query += "key=" + AppData.API_KEY + "&";
         query += "text=" + text;
 
         System.out.println(query);
@@ -39,7 +40,8 @@ public class QueryYandex {
         return query;
     }
 
-    public void getTextOut(){
+    @Override
+    public void translate(){
         new ProgressTask().execute();
     }
 

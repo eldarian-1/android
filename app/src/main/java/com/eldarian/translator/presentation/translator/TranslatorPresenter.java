@@ -1,7 +1,7 @@
-package com.eldarian.translator.translator;
+package com.eldarian.translator.presentation.translator;
 
-import com.eldarian.translator.QueryYandex;
-import com.eldarian.translator.Translations;
+import com.eldarian.translator.domain.YandexQuery;
+import com.eldarian.translator.model.Translations;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,8 +18,8 @@ public class TranslatorPresenter {
     }
 
     public void pushQuery() throws IOException {
-        QueryYandex query = new QueryYandex(view.getTextIn(),view.getLangIn(), view.getLangOut(), this);
-        query.getTextOut();
+        YandexQuery query = new YandexQuery(view.getTextIn(),view.getLangIn(), view.getLangOut(), this);
+        query.translate();
     }
 
     public void setTextOut(String text) throws JSONException {
@@ -29,9 +29,14 @@ public class TranslatorPresenter {
         view.setTextOut(textOut);
     }
 
-    public void viewIsReady() {
-        //loadUsers();
+    public void clearField() {
+        view.setLangIn(0);
+        view.setLangOut(0);
+        view.setTextIn("");
+        view.setTextOut("");
     }
+
+    public void viewIsReady() {}
     public void attachView(TranslatorView view) {
         this.view = view;
     }

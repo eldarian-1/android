@@ -1,10 +1,9 @@
-package com.eldarian.translator.story;
+package com.eldarian.translator.presentation.story;
 
 import android.content.Context;
-import com.eldarian.translator.DataBase;
-import com.eldarian.translator.Translations;
+import com.eldarian.translator.model.DataBase;
+import com.eldarian.translator.model.Translations;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StoryModel {
@@ -15,7 +14,7 @@ public class StoryModel {
         db = new DataBase(context);
     }
 
-    public ArrayList<Translations> getTranslationsList(){
+    public List<Translations> getTranslationsList(){
         return db.getTranslationsList();
     }
     public void clearTranslations(Context context){

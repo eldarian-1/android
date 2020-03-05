@@ -1,8 +1,6 @@
-package com.eldarian.translator;
+package com.eldarian.translator.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Translations implements Serializable {
 

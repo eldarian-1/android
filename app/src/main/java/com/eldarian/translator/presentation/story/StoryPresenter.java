@@ -1,12 +1,11 @@
-package com.eldarian.translator.story;
+package com.eldarian.translator.presentation.story;
 
 import android.content.Context;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.eldarian.translator.Translations;
+import com.eldarian.translator.model.Translations;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StoryPresenter extends AppCompatActivity {
@@ -25,7 +24,7 @@ public class StoryPresenter extends AppCompatActivity {
     }
     public void viewIsReady() {}
 
-    public ArrayList<Translations> getTranslationsList()
+    public List<Translations> getTranslationsList()
     {
         return model.getTranslationsList();
     }

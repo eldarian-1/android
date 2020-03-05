@@ -3,14 +3,8 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorBackroundTranslator"
-    android:textColor="@color/colorTextTranslator"
-    android:orientation="vertical"
-    android:layout_gravity="center_vertical"
-    android:paddingHorizontal="15dp"
-    tools:context=".translator.TranslatorActivity">
+    style="@style/linear_layout_style"
+    tools:context=".presentation.translator.TranslatorActivity">
 
     <TextView
         android:id="@+id/text_lang_in"
@@ -27,7 +21,6 @@
 
     <EditText
         android:id="@+id/text_in"
-        android:background="@drawable/edit_text_style"
         style="@style/edit_text_style"
         android:hint="@string/text_out"/>
 
@@ -47,7 +40,6 @@
 
     <EditText
         android:id="@+id/text_out"
-        android:background="@drawable/edit_text_style"
         style="@style/edit_text_style"
         android:hint="@string/text_in"/>
 

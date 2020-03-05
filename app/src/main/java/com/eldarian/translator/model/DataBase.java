@@ -1,4 +1,4 @@
-package com.eldarian.translator;
+package com.eldarian.translator.model;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import static com.eldarian.translator.DataApp.CREATE_DB;
+import static com.eldarian.translator.model.AppData.CREATE_DB;
 
 public class DataBase {
 
@@ -18,7 +18,6 @@ public class DataBase {
     }
 
     public void addTranslate(Translations translate){
-        System.out.println("Hello pacani!");
         String quer = "INSERT INTO translations (langIn, langOut, textIn, textOut) VALUES (\"" + translate.getLangIn() + "\", \""
                 + translate.getLangOut() +"\", \"" + translate.getTextIn() + "\", \"" + translate.getTextOut() + "\");";
         System.out.println(quer);
