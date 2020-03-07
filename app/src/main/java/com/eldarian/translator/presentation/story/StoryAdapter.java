@@ -1,4 +1,4 @@
-package com.eldarian.translator.domain;
+package com.eldarian.translator.presentation.story;
 
 import android.view.LayoutInflater;
 import android.view.View;

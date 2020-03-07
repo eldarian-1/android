@@ -1,22 +1,32 @@
 package com.eldarian.translator.presentation.translator;
 
 import com.eldarian.translator.app.App;
-import com.eldarian.translator.domain.YandexQuery;
+import com.eldarian.translator.app.AppData;
 import com.eldarian.translator.app.Translations;
+import com.eldarian.translator.api.YandexTranslateUseCase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TranslatorPresenter {
 
     private TranslatorView view;
+
     public TranslatorPresenter(){}
 
-    public void pushQuery() throws IOException {
-        YandexQuery query = new YandexQuery(view.getTextIn(),view.getLangIn(), view.getLangOut(), this);
-        query.translate();
+    public void getTranslate(String in, String out, String text){
+
+        YandexTranslateUseCase yandexQuery = new YandexTranslateUseCase();
+        Map mapper = new HashMap<String, String>();
+
+        mapper.put("key", AppData.API_KEY);
+        mapper.put("lang", in + "-" + out);
+        mapper.put("text", text);
+
+        yandexQuery.translate(this, mapper);
     }
 
     public void addTranslate(Translations translate){

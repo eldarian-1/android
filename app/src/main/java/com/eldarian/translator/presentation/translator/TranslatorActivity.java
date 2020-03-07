@@ -15,8 +15,6 @@ import android.widget.Spinner;
 import com.eldarian.translator.R;
 import com.eldarian.translator.presentation.story.StoryActivity;
 
-import java.io.IOException;
-
 public class TranslatorActivity extends AppCompatActivity
         implements TranslatorView, View.OnClickListener {
 
@@ -44,7 +42,7 @@ public class TranslatorActivity extends AppCompatActivity
 
         buttonGo.setOnClickListener(this);
 
-        presenter = new TranslatorPresenter(new TranslatorModel(this));
+        presenter = new TranslatorPresenter();
         presenter.attachView(this);
         presenter.viewIsReady();
     }
@@ -75,11 +73,7 @@ public class TranslatorActivity extends AppCompatActivity
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.button_go:{
-                try {
-                    presenter.pushQuery();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                presenter.getTranslate(getLangIn(), getLangOut(), getTextIn());
                 break;
             }
         }
