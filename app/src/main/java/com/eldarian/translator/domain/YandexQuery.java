@@ -2,9 +2,8 @@ package com.eldarian.translator.domain;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
-import android.util.Log;
 
-import com.eldarian.translator.model.AppData;
+import com.eldarian.translator.app.AppData;
 import com.eldarian.translator.presentation.translator.TranslatorPresenter;
 
 import org.json.JSONException;
@@ -34,10 +33,6 @@ public class YandexQuery implements TranslateUseCase {
         query += "text=" + text;
     }
 
-    public String getQuery() {
-        return query;
-    }
-
     @Override
     public void translate(){
         new ProgressTask().execute();
@@ -50,8 +45,10 @@ public class YandexQuery implements TranslateUseCase {
             String content;
             try{
                 content = getContent(query);
+                TranslatorPresenter presenter = new TranslatorPresenter(new TranslatorModel());
+                presenter.setTextOut(content);
             }
-            catch (IOException ex){
+            catch (IOException | JSONException ex){
                 content = ex.getMessage();
             }
             return content;
@@ -66,8 +63,6 @@ public class YandexQuery implements TranslateUseCase {
             try {
                 URL url = new URL(path);
                 HttpsURLConnection c = (HttpsURLConnection) url.openConnection();
-                //c.setRequestMethod("POST");
-                //c.addRequestProperty("text", text);
                 c.setRequestMethod("GET");
                 c.setReadTimeout(10000);
                 c.connect();

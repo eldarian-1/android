@@ -1,4 +1,4 @@
-package com.eldarian.translator.renderer;
+package com.eldarian.translator.domain;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.eldarian.translator.R;
-import com.eldarian.translator.model.Translations;
+import com.eldarian.translator.app.Translations;
 
 import java.util.List;
 

@@ -1,4 +1,6 @@
-package com.eldarian.translator.model;
+package com.eldarian.translator.app;
+
+import com.eldarian.translator.database.Translates;
 
 import java.io.Serializable;
 
@@ -46,6 +48,15 @@ public class Translations implements Serializable {
 
     public void setLangOut(String langOut) {
         this.langOut = langOut;
+    }
+
+    public Translates getTranslates(){
+        Translates translate = new Translates();
+        translate.langIn = this.langIn;
+        translate.langOut = this.langOut;
+        translate.textIn = this.textIn;
+        translate.textOut = this.textOut;
+        return translate;
     }
 
 }

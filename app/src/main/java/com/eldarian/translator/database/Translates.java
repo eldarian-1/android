@@ -4,7 +4,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Translate {
+public class Translates {
 
     @PrimaryKey
     public long id;

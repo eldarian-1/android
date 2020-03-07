@@ -1,8 +1,10 @@
-package com.eldarian.translator.database;
+package com.eldarian.translator.app;
 
 import android.app.Application;
 
 import androidx.room.Room;
+
+import com.eldarian.translator.database.AppDataBase;
 
 public class App extends Application {
 
@@ -13,7 +15,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        database = Room.databaseBuilder(this, AppDataBase.class, "db")
+        database = Room.databaseBuilder(this, AppDataBase.class, "appdata")
                 .allowMainThreadQueries()
                 .build();
     }
@@ -25,4 +27,6 @@ public class App extends Application {
     public AppDataBase getDatabase() {
         return database;
     }
+
+
 }

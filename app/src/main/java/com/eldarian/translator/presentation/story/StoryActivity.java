@@ -9,8 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.eldarian.translator.R;
-import com.eldarian.translator.renderer.StoryAdapter;
-import com.eldarian.translator.model.Translations;
+import com.eldarian.translator.domain.StoryAdapter;
+import com.eldarian.translator.app.Translations;
 
 import java.util.ArrayList;
 
