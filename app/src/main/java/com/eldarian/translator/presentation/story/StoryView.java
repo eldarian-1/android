@@ -7,8 +7,6 @@ import androidx.annotation.NonNull;
 
 public interface StoryView {
 
-    boolean onCreateOptionsMenu(Menu menu);
-    boolean onOptionsItemSelected(@NonNull MenuItem item);
     void setTranslationsList();
 
 }

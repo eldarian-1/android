@@ -12,7 +12,7 @@ public interface TranslatesDao {
     @Query("SELECT * FROM translates")
     List<Translates> getAll();
 
-    @Query("DROP TABLE IF EXISTS translates")
+    @Query("DELETE FROM translates")
     void dropData();
 
     @Insert

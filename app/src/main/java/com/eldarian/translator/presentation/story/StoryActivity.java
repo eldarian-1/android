@@ -12,6 +12,7 @@ import com.eldarian.translator.R;
 import com.eldarian.translator.app.Translations;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StoryActivity extends AppCompatActivity implements StoryView {
 
@@ -27,7 +28,7 @@ public class StoryActivity extends AppCompatActivity implements StoryView {
     }
 
     private void init(){
-        presenter = new StoryPresenter(new StoryModel(this));
+        presenter = new StoryPresenter();
         presenter.attachView(this);
         presenter.viewIsReady();
         setTranslationsList();
@@ -48,10 +49,10 @@ public class StoryActivity extends AppCompatActivity implements StoryView {
                 break;
             }
             case R.id.cl_story:{
-                ArrayList<Translations> empty = new ArrayList<Translations>();
+                List empty = new ArrayList<Translations>();
                 StoryAdapter adapter = new StoryAdapter(empty);
                 recycler.setAdapter(adapter);
-                presenter.clearTranslations(this);
+                presenter.clearTranslations();
                 break;
             }
         }
@@ -59,7 +60,6 @@ public class StoryActivity extends AppCompatActivity implements StoryView {
     }
 
     public void setTranslationsList(){
-        System.out.println("Hello world!");
         StoryAdapter adapter = new StoryAdapter(presenter.getTranslationsList());
         recycler.setAdapter(adapter);
     }
