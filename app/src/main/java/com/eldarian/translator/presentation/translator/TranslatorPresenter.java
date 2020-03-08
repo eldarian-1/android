@@ -1,15 +1,9 @@
 package com.eldarian.translator.presentation.translator;
 
 import com.eldarian.translator.app.App;
-import com.eldarian.translator.app.AppData;
-import com.eldarian.translator.app.Translations;
+import com.eldarian.translator.app.TranslateView;
 import com.eldarian.translator.api.YandexTranslateUseCase;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.eldarian.translator.database.TranslateBase;
 
 public class TranslatorPresenter {
 
@@ -17,33 +11,22 @@ public class TranslatorPresenter {
 
     public TranslatorPresenter(){}
 
-    public void getTranslate(String in, String out, String text){
-
+    public void getTranslate(TranslateView translateView){
         YandexTranslateUseCase yandexQuery = new YandexTranslateUseCase();
-        Map mapper = new HashMap<String, String>();
-
-        mapper.put("key", AppData.API_KEY);
-        mapper.put("lang", in + "-" + out);
-        mapper.put("text", text);
-
-        yandexQuery.translate(this, mapper);
+        yandexQuery.translate(this,translateView.getLangFrom() + "-" + translateView.getLangTo(), translateView.getTextIn());
     }
 
-    public void addTranslate(Translations translate){
-        App instance = App.getInstance();
-        instance.getDatabase().translateDao().insert(translate.getTranslates());
+    public void addTranslateBase(TranslateBase translateBase){
+        App.getInstance().getDatabase().translateDao().insert(translateBase);
     }
 
-    public void setTextOut(String text) throws JSONException {
-        JSONObject json = new JSONObject(text);
-        String textOut = json.getJSONArray("text").getString(0);
-        addTranslate(new Translations(view.getLangIn(), view.getLangOut(), view.getTextIn(), textOut));
-        view.setTextOut(textOut);
+    public void setTextOut(String text){
+        view.setTextOut(text);
     }
 
     public void clearField() {
-        view.setLangIn(0);
-        view.setLangOut(0);
+        view.setLangFrom(0);
+        view.setLangTo(0);
         view.setTextIn("");
         view.setTextOut("");
     }

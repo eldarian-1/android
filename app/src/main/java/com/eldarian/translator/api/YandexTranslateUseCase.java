@@ -3,11 +3,8 @@ package com.eldarian.translator.api;
 import android.util.Log;
 
 import com.eldarian.translator.app.AppData;
+import com.eldarian.translator.database.TranslateBase;
 import com.eldarian.translator.presentation.translator.TranslatorPresenter;
-
-import org.json.JSONException;
-
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,34 +14,48 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class YandexTranslateUseCase implements TranslateUseCase {
 
-    @Override
-    public void translate(final TranslatorPresenter presenter, Map<String, String> mapper) {
+    private Retrofit retrofit;
+    private TranslateApi translateApi;
 
-        Retrofit retrofit = new Retrofit.Builder()
+    public YandexTranslateUseCase(){
+        retrofit = new Retrofit.Builder()
                 .baseUrl(AppData.API_URI)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+        translateApi = retrofit.create(TranslateApi.class);
+    }
 
-        TranslationAPI translationApi = retrofit.create(TranslationAPI.class);
+    @Override
+    public void translate(final TranslatorPresenter presenter, final String lang, final String text) {
 
-        translationApi.getTranslate(mapper, new Callback<String>() {
+        Call<TranslateResponse> translateResponseCall = translateApi.getTranslate(lang, text);
+
+        translateResponseCall.enqueue(new Callback<TranslateResponse>() {
 
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.d("Response", "Response " + response.body());
-                try {
-                    presenter.setTextOut(response.body());
-                } catch (JSONException e) {
-                    e.printStackTrace();
+            public void onResponse(Call<TranslateResponse> call, Response<TranslateResponse> response) {
+
+                TranslateResponse translateResponse = response.body();
+                if(translateResponse != null) {
+
+                    TranslateBase translateBase = new TranslateBase();
+                    translateBase.lang = lang;
+                    translateBase.textIn = text;
+                    translateBase.textOut = translateResponse.text[0];
+                    presenter.addTranslateBase(translateBase);
+                    presenter.setTextOut(translateBase.textOut);
+
+                } else {
+                    Log.d("TranslateQuery", response.toString());
                 }
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.d("Response", "failure " + t);
+            public void onFailure(Call<TranslateResponse> call, Throwable t) {
+                Log.d("TranslateQuery", "failture " + t);
             }
-
         });
+
     }
 
 }

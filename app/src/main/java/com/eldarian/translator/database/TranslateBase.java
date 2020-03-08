@@ -4,12 +4,11 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Translates {
+public class TranslateBase {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public long id;
-    public String langIn;
-    public String langOut;
+    public String lang;
     public String textIn;
     public String textOut;
 

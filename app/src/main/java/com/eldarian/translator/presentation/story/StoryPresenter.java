@@ -10,7 +10,7 @@ public class StoryPresenter {
 
     public StoryPresenter(){}
 
-    List getTranslationsList() {
+    List getTranslateList() {
         App instance = App.getInstance();
         return instance.getDatabase().translateDao().getAll();
     }

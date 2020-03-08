@@ -11,20 +11,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.eldarian.translator.R;
+import com.eldarian.translator.app.TranslateView;
 import com.eldarian.translator.presentation.story.StoryActivity;
 
-public class TranslatorActivity extends AppCompatActivity
-        implements TranslatorView, View.OnClickListener {
+public class TranslatorActivity extends AppCompatActivity implements TranslatorView, View.OnClickListener {
 
     private TranslatorPresenter presenter;
 
-    private Spinner langIn;
-    private Spinner langOut;
+    private Spinner langFrom;
+    private Spinner langTo;
     private EditText textIn;
-    private EditText textOut;
-    private Button buttonGo;
+    private TextView textOut;
+    private Button buttonTranslate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +34,15 @@ public class TranslatorActivity extends AppCompatActivity
         init();
     }
 
-    private void init(){
-        langIn = findViewById(R.id.lang_in);
-        langOut = findViewById(R.id.lang_out);
+    @Override
+    public void init(){
+        langFrom = findViewById(R.id.lang_from);
+        langTo = findViewById(R.id.lang_to);
         textIn = findViewById(R.id.text_in);
         textOut = findViewById(R.id.text_out);
-        buttonGo = findViewById(R.id.button_go);
+        buttonTranslate = findViewById(R.id.button_translate);
 
-        buttonGo.setOnClickListener(this);
+        buttonTranslate.setOnClickListener(this);
 
         presenter = new TranslatorPresenter();
         presenter.attachView(this);
@@ -72,8 +74,8 @@ public class TranslatorActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.button_go:{
-                presenter.getTranslate(getLangIn(), getLangOut(), getTextIn());
+            case R.id.button_translate:{
+                presenter.getTranslate(getTranslateView());
                 break;
             }
         }
@@ -86,13 +88,13 @@ public class TranslatorActivity extends AppCompatActivity
     }
 
     @Override
-    public void setLangIn(int position){
-        langIn.setSelection(position);
+    public void setLangFrom(int position){
+        langFrom.setSelection(position);
     }
 
     @Override
-    public void setLangOut(int position){
-        langOut.setSelection(position);
+    public void setLangTo(int position){
+        langTo.setSelection(position);
     }
 
     @Override
@@ -106,20 +108,13 @@ public class TranslatorActivity extends AppCompatActivity
     }
 
     @Override
-    public String getTextIn() {
-        return textIn.getText().toString();
-    }
-
-    @Override
-    public String getLangIn() {
+    public TranslateView getTranslateView(){
         String[] choose = getResources().getStringArray(R.array.lang_code);
-        return choose[langIn.getSelectedItemPosition()];
-    }
-
-    @Override
-    public String getLangOut() {
-        String[] choose = getResources().getStringArray(R.array.lang_code);
-        return choose[langOut.getSelectedItemPosition()];
+        TranslateView translateView = new TranslateView();
+        translateView.setLangFrom(choose[langFrom.getSelectedItemPosition()]);
+        translateView.setLangTo(choose[langTo.getSelectedItemPosition()]);
+        translateView.setTextIn(textIn.getText().toString());
+        return translateView;
     }
 
 }

@@ -9,49 +9,46 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.eldarian.translator.R;
-import com.eldarian.translator.app.Translations;
+import com.eldarian.translator.database.TranslateBase;
 
 import java.util.List;
 
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> {
 
-    private List<Translations> translates;
+    private List<TranslateBase> translateBaseList;
 
-    public StoryAdapter(List<Translations> translates) {
-        this.translates = translates;
+    public StoryAdapter(List<TranslateBase> translateBaseList) {
+        this.translateBaseList = translateBaseList;
     }
 
     @NonNull
     @Override
     public StoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(
-                parent.getContext()).inflate(R.layout.item_stories, parent, false
-        );
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_story, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull StoryAdapter.ViewHolder holder, int position) {
-        Translations translate = translates.get(position);
-        holder.langIn.setText(translate.getLangIn());
-        holder.langOut.setText(translate.getLangOut());
-        holder.textIn.setText(translate.getTextIn());
-        holder.textOut.setText(translate.getTextOut());
+        TranslateBase translateBase = translateBaseList.get(position);
+        holder.lang.setText(translateBase.lang);
+        holder.textIn.setText(translateBase.textIn);
+        holder.textOut.setText(translateBase.textOut);
     }
 
     @Override
     public int getItemCount() {
-        return translates.size();
+        return translateBaseList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView langIn, langOut, textIn, textOut;
+        TextView lang, textIn, textOut;
 
         ViewHolder(View view) {
             super(view);
-            langIn = view.findViewById(R.id.lang_in);
-            langOut = view.findViewById(R.id.lang_out);
+            lang = view.findViewById(R.id.lang);
             textIn = view.findViewById(R.id.text_in);
             textOut = view.findViewById(R.id.text_out);
         }

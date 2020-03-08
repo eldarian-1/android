@@ -3,10 +3,10 @@
     android:thickness="0dp"
     android:shape="rectangle">
     <stroke android:width="3dp"
-        android:color="#4799E8"/>
+        android:color="@color/colorButtonTranslator"/>
     <corners android:radius="5dp" />
     <gradient
-        android:startColor="#C8C8C8"
+        android:startColor="#fbfdff"
         android:endColor="#FFFFFF"
         android:type="linear"
         android:angle="270"/>

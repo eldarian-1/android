@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.eldarian.translator.R;
-import com.eldarian.translator.app.Translations;
+import com.eldarian.translator.app.TranslateView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class StoryActivity extends AppCompatActivity implements StoryView {
 
     private StoryPresenter presenter;
 
-    private RecyclerView recycler;
+    private RecyclerView recyclerStory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +27,13 @@ public class StoryActivity extends AppCompatActivity implements StoryView {
         init();
     }
 
-    private void init(){
+    @Override
+    public void init(){
+        recyclerStory = findViewById(R.id.recycler_story);
         presenter = new StoryPresenter();
         presenter.attachView(this);
         presenter.viewIsReady();
-        setTranslationsList();
+        setTranslateList();
     }
 
     @Override
@@ -49,9 +51,9 @@ public class StoryActivity extends AppCompatActivity implements StoryView {
                 break;
             }
             case R.id.cl_story:{
-                List empty = new ArrayList<Translations>();
+                List empty = new ArrayList<TranslateView>();
                 StoryAdapter adapter = new StoryAdapter(empty);
-                recycler.setAdapter(adapter);
+                recyclerStory.setAdapter(adapter);
                 presenter.clearTranslations();
                 break;
             }
@@ -59,9 +61,10 @@ public class StoryActivity extends AppCompatActivity implements StoryView {
         return true;
     }
 
-    public void setTranslationsList(){
-        StoryAdapter adapter = new StoryAdapter(presenter.getTranslationsList());
-        recycler.setAdapter(adapter);
+    @Override
+    public void setTranslateList(){
+        StoryAdapter adapter = new StoryAdapter(presenter.getTranslateList());
+        recyclerStory.setAdapter(adapter);
     }
 
 }
