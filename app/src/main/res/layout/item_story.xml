@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -19,7 +20,6 @@
         style="@style/text_style"
         android:text="Hello World! Hello World! Hello World! Hello World! Hello World!"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="#002838"
         app:layout_constraintTop_toBottomOf="@id/lang"/>
 
     <TextView
@@ -28,7 +28,5 @@
         android:text="Привет мир! Привет мир! Привет мир! Привет мир! Привет мир!"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_in"/>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

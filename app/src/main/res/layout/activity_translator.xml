@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="right|center_vertical"
-            android:text="from: " />
+            android:text="@string/text_lang_from" />
 
         <Spinner
             android:id="@+id/lang_from"
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="right|center_vertical"
-            android:text="to: " />
+            android:text="@string/text_lang_to" />
 
         <Spinner
             android:id="@+id/lang_to"
