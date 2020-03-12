@@ -1,6 +1,7 @@
-package com.eldarian.translator.presentation.story;
+package com.eldarian.translator.presentation.threads;
 
 import com.eldarian.translator.app.App;
+import com.eldarian.translator.presentation.story.StoryView;
 
 import java.util.List;
 

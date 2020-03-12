@@ -1,4 +1,4 @@
-package com.eldarian.translator.api;
+package com.eldarian.translator.entity.service;
 
 import android.util.Log;
 

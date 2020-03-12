@@ -1,4 +1,4 @@
-package com.eldarian.translator.presentation.story;
+package com.eldarian.translator.presentation.threads;
 
 import com.eldarian.translator.app.App;
 

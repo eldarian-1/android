@@ -3,6 +3,7 @@ package com.eldarian.translator.presentation.translator;
 import com.eldarian.translator.app.App;
 import com.eldarian.translator.app.TranslateView;
 import com.eldarian.translator.database.TranslateBase;
+import com.eldarian.translator.presentation.threads.TranslatorThread;
 
 public class TranslatorPresenter {
 

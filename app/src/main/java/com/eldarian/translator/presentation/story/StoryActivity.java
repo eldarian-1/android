@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import com.eldarian.translator.R;
 import com.eldarian.translator.app.TranslateView;
+import com.eldarian.translator.presentation.renderers.StoryAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

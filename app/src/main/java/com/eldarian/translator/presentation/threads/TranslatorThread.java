@@ -1,7 +1,8 @@
-package com.eldarian.translator.presentation.translator;
+package com.eldarian.translator.presentation.threads;
 
-import com.eldarian.translator.api.YandexTranslateUseCase;
+import com.eldarian.translator.entity.service.YandexTranslateUseCase;
 import com.eldarian.translator.app.TranslateView;
+import com.eldarian.translator.presentation.translator.TranslatorPresenter;
 
 class TranslatorThread implements Runnable {
 
@@ -19,7 +20,7 @@ class TranslatorThread implements Runnable {
     @Override
     public void run() {
         YandexTranslateUseCase yandexQuery = new YandexTranslateUseCase();
-        yandexQuery.translate(presenter,view.getLangFrom() + "-" + view.getLangTo(), view.getTextIn());
+        yandexQuery.translate(presenter, view.getLangFrom() + "-" + view.getLangTo(), view.getTextIn());
     }
 
 }
