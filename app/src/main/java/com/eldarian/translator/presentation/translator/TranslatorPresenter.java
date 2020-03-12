@@ -2,7 +2,6 @@ package com.eldarian.translator.presentation.translator;
 
 import com.eldarian.translator.app.App;
 import com.eldarian.translator.app.TranslateView;
-import com.eldarian.translator.api.YandexTranslateUseCase;
 import com.eldarian.translator.database.TranslateBase;
 
 public class TranslatorPresenter {
@@ -12,8 +11,7 @@ public class TranslatorPresenter {
     public TranslatorPresenter(){}
 
     public void getTranslate(TranslateView translateView){
-        YandexTranslateUseCase yandexQuery = new YandexTranslateUseCase();
-        yandexQuery.translate(this,translateView.getLangFrom() + "-" + translateView.getLangTo(), translateView.getTextIn());
+        new TranslatorThread(translateView, this);
     }
 
     public void addTranslateBase(TranslateBase translateBase){

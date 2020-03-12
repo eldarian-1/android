@@ -17,7 +17,6 @@ import java.util.List;
 public class StoryActivity extends AppCompatActivity implements StoryView {
 
     private StoryPresenter presenter;
-
     private RecyclerView recyclerStory;
 
     @Override
@@ -33,7 +32,7 @@ public class StoryActivity extends AppCompatActivity implements StoryView {
         presenter = new StoryPresenter();
         presenter.attachView(this);
         presenter.viewIsReady();
-        setTranslateList();
+        presenter.setTranslateList();
     }
 
     @Override
@@ -52,8 +51,7 @@ public class StoryActivity extends AppCompatActivity implements StoryView {
             }
             case R.id.cl_story:{
                 List empty = new ArrayList<TranslateView>();
-                StoryAdapter adapter = new StoryAdapter(empty);
-                recyclerStory.setAdapter(adapter);
+                setTranslateList(empty);
                 presenter.clearTranslations();
                 break;
             }
@@ -62,8 +60,8 @@ public class StoryActivity extends AppCompatActivity implements StoryView {
     }
 
     @Override
-    public void setTranslateList(){
-        StoryAdapter adapter = new StoryAdapter(presenter.getTranslateList());
+    public void setTranslateList(List list){
+        StoryAdapter adapter = new StoryAdapter(list);
         recyclerStory.setAdapter(adapter);
     }
 
