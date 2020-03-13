@@ -36,6 +36,7 @@ public class TranslatorActivity extends AppCompatActivity implements TranslatorV
 
     @Override
     public void init(){
+
         langFrom = findViewById(R.id.lang_from);
         langTo = findViewById(R.id.lang_to);
         textIn = findViewById(R.id.text_in);

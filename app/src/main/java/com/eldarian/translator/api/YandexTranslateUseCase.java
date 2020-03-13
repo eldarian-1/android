@@ -1,4 +1,4 @@
-package com.eldarian.translator.entity.service;
+package com.eldarian.translator.api;
 
 import android.util.Log;
 
@@ -42,6 +42,8 @@ public class YandexTranslateUseCase implements TranslateUseCase {
                     translateBase.lang = lang;
                     translateBase.textIn = text;
                     translateBase.textOut = translateResponse.text[0];
+
+                    // подозрительная часть
                     presenter.addTranslateBase(translateBase);
                     presenter.setTextOut(translateBase.textOut);
 

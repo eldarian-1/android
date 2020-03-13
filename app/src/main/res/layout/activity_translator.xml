@@ -4,6 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/linear_layout_style"
+    android:layout_gravity="top"
+    android:layout_marginTop="15dp"
     tools:context=".presentation.translator.TranslatorActivity">
 
     <LinearLayout

@@ -1,4 +1,4 @@
-package com.eldarian.translator.entity.service;
+package com.eldarian.translator.api;
 
 import com.eldarian.translator.app.AppData;
 

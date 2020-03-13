@@ -10,7 +10,7 @@ public class GetStoryThread implements Runnable {
     private Thread thread;
     private StoryView view;
 
-    GetStoryThread(StoryView view){
+    public GetStoryThread(StoryView view){
         this.thread = new Thread(this, "story");
         this.view = view;
         this.thread.start();

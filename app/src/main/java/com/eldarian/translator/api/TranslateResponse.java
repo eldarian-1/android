@@ -1,4 +1,4 @@
-package com.eldarian.translator.entity.service;
+package com.eldarian.translator.api;
 
 public class TranslateResponse {
 

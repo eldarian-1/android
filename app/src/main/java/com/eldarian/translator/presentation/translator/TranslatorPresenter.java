@@ -1,8 +1,8 @@
 package com.eldarian.translator.presentation.translator;
 
-import com.eldarian.translator.app.App;
 import com.eldarian.translator.app.TranslateView;
 import com.eldarian.translator.database.TranslateBase;
+import com.eldarian.translator.presentation.threads.AddTranslateThread;
 import com.eldarian.translator.presentation.threads.TranslatorThread;
 
 public class TranslatorPresenter {
@@ -11,12 +11,12 @@ public class TranslatorPresenter {
 
     public TranslatorPresenter(){}
 
-    public void getTranslate(TranslateView translateView){
+    public void getTranslate(TranslateView translateView) {
         new TranslatorThread(translateView, this);
     }
 
     public void addTranslateBase(TranslateBase translateBase){
-        App.getInstance().getDatabase().translateDao().insert(translateBase);
+        new AddTranslateThread(translateBase);
     }
 
     public void setTextOut(String text){
