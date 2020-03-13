@@ -1,9 +1,12 @@
 package com.eldarian.translator.presentation.translator;
 
+import com.eldarian.translator.api.TranslateResponse;
+import com.eldarian.translator.api.YandexTranslateUseCase;
 import com.eldarian.translator.app.TranslateView;
 import com.eldarian.translator.database.TranslateBase;
 import com.eldarian.translator.presentation.threads.AddTranslateThread;
-import com.eldarian.translator.presentation.threads.TranslatorThread;
+
+import io.reactivex.functions.Consumer;
 
 public class TranslatorPresenter {
 
@@ -12,7 +15,24 @@ public class TranslatorPresenter {
     public TranslatorPresenter(){}
 
     public void getTranslate(TranslateView translateView) {
-        new TranslatorThread(translateView, this);
+
+        Consumer<TranslateResponse> consumerResponse = new Consumer<TranslateResponse>() {
+            @Override
+            public void accept(TranslateResponse item) throws Exception {
+                setTextOut(item.text[0]);
+            }
+        };
+
+        Consumer<TranslateBase> consumerBase = new Consumer<TranslateBase>() {
+            @Override
+            public void accept(TranslateBase item) throws Exception {
+                addTranslateBase(item);
+            }
+        };
+
+        YandexTranslateUseCase yandexQuery = new YandexTranslateUseCase();
+        yandexQuery.translate(consumerResponse, consumerBase, translateView.getLangFrom() + "-" + translateView.getLangTo(), translateView.getTextIn());
+
     }
 
     public void addTranslateBase(TranslateBase translateBase){

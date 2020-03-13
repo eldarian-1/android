@@ -1,9 +1,11 @@
 package com.eldarian.translator.api;
 
-import com.eldarian.translator.presentation.translator.TranslatorPresenter;
+import com.eldarian.translator.database.TranslateBase;
+
+import io.reactivex.functions.Consumer;
 
 public interface TranslateUseCase {
 
-    void translate(final TranslatorPresenter presenter, final String lang, final String text);
+    void translate(Consumer<TranslateResponse> consumerResponse, Consumer<TranslateBase> consumerBase, final String lang, final String text);
 
 }

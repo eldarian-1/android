@@ -4,7 +4,9 @@ import android.util.Log;
 
 import com.eldarian.translator.app.AppData;
 import com.eldarian.translator.database.TranslateBase;
-import com.eldarian.translator.presentation.translator.TranslatorPresenter;
+
+import io.reactivex.functions.Consumer;
+import io.reactivex.Observable;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,7 +28,7 @@ public class YandexTranslateUseCase implements TranslateUseCase {
     }
 
     @Override
-    public void translate(final TranslatorPresenter presenter, final String lang, final String text) {
+    public void translate(Consumer<TranslateResponse> consumerResponse, Consumer<TranslateBase> consumerBase, final String lang, final String text) {
 
         Call<TranslateResponse> translateResponseCall = translateApi.getTranslate(lang, text);
 
@@ -43,18 +45,20 @@ public class YandexTranslateUseCase implements TranslateUseCase {
                     translateBase.textIn = text;
                     translateBase.textOut = translateResponse.text[0];
 
-                    // подозрительная часть
-                    presenter.addTranslateBase(translateBase);
-                    presenter.setTextOut(translateBase.textOut);
+                    Observable<TranslateResponse> translateResponseObservable = Observable.just(translateResponse);
+                    translateResponseObservable.subscribe(consumerResponse).dispose();
+
+                    Observable<TranslateBase> translateBaseObservable = Observable.just(translateBase);
+                    translateBaseObservable.subscribe(consumerBase).dispose();
 
                 } else {
-                    Log.d("TranslateQuery", response.toString());
+                    Log.d("EldarianLog", response.toString());
                 }
             }
 
             @Override
             public void onFailure(Call<TranslateResponse> call, Throwable t) {
-                Log.d("TranslateQuery", "failture " + t);
+                Log.d("EldarianLog", "failture " + t);
             }
         });
 
