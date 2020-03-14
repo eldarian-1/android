@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/linear_layout_style"
     android:layout_gravity="top"
@@ -9,40 +8,53 @@
     tools:context=".presentation.translator.TranslatorActivity">
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:weightSum="5">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="3">
 
-        <TextView
-            android:id="@+id/text_lang_from"
-            android:layout_weight="1"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="right|center_vertical"
-            android:text="@string/text_lang_from" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
 
-        <Spinner
-            android:id="@+id/lang_from"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:entries="@array/lang_code" />
+            <TextView
+                android:id="@+id/text_lang_from"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left|center_vertical"
+                android:text="@string/text_lang_from" />
 
-        <TextView
-            android:id="@+id/text_lang_to"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="right|center_vertical"
-            android:text="@string/text_lang_to" />
+            <Spinner
+                android:id="@+id/lang_from"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:entries="@array/lang_full" />
 
-        <Spinner
-            android:id="@+id/lang_to"
-            android:layout_weight="1"
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:entries="@array/lang_code" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/text_lang_to"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left|center_vertical"
+                android:text="@string/text_lang_to" />
+
+            <Spinner
+                android:id="@+id/lang_to"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:entries="@array/lang_full" />
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/button_translate"
@@ -59,8 +71,8 @@
 
     <TextView
         android:id="@+id/text_out"
-        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp" />
 
 </LinearLayout>

@@ -44,7 +44,7 @@ public class YandexTranslateUseCase implements TranslateUseCase {
                 TranslateResponse translateResponse = response.body();
                 if(translateResponse != null) {
 
-                    TranslateBase translateBase = Mapper.queryResponseToBase(translateQuery, translateResponse.text[0]);
+                    TranslateBase translateBase = Mapper.queryResponseToBase(translateQuery, translateResponse);
 
                     Observable<TranslateResponse> translateResponseObservable = Observable.just(translateResponse);
                     translateResponseObservable.subscribe(consumerResponse).dispose();

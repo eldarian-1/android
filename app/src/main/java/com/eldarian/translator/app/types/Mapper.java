@@ -2,11 +2,11 @@ package com.eldarian.translator.app.types;
 
 public class Mapper {
 
-    public static TranslateBase queryResponseToBase(TranslateQuery translateQuery, String textOut){
+    public static TranslateBase queryResponseToBase(TranslateQuery translateQuery, TranslateResponse translateResponse){
         TranslateBase translateBase = new TranslateBase();
         translateBase.lang = translateQuery.getLang();
         translateBase.textIn = translateQuery.getText();
-        translateBase.textOut = textOut;
+        translateBase.textOut = translateResponse.text[0];
         return translateBase;
     }
 

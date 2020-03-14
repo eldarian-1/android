@@ -110,11 +110,14 @@ public class TranslatorActivity extends AppCompatActivity implements TranslatorV
 
     @Override
     public TranslateView getTranslateView(){
+
         String[] choose = getResources().getStringArray(R.array.lang_code);
+
         TranslateView translateView = new TranslateView();
         translateView.setLangFrom(choose[langFrom.getSelectedItemPosition()]);
         translateView.setLangTo(choose[langTo.getSelectedItemPosition()]);
         translateView.setTextIn(textIn.getText().toString());
+
         return translateView;
     }
 
