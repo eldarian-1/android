@@ -1,4 +1,4 @@
-package com.eldarian.translator.app;
+package com.eldarian.translator.app.types;
 
 import java.io.Serializable;
 

@@ -1,6 +1,6 @@
 package com.eldarian.translator.presentation.translator;
 
-import com.eldarian.translator.app.TranslateView;
+import com.eldarian.translator.app.types.TranslateView;
 
 public interface TranslatorView {
 

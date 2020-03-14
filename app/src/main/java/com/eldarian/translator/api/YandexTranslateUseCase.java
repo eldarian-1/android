@@ -3,7 +3,10 @@ package com.eldarian.translator.api;
 import android.util.Log;
 
 import com.eldarian.translator.app.AppData;
-import com.eldarian.translator.database.TranslateBase;
+import com.eldarian.translator.app.types.Mapper;
+import com.eldarian.translator.app.types.TranslateBase;
+import com.eldarian.translator.app.types.TranslateQuery;
+import com.eldarian.translator.app.types.TranslateResponse;
 
 import io.reactivex.functions.Consumer;
 import io.reactivex.Observable;
@@ -28,9 +31,10 @@ public class YandexTranslateUseCase implements TranslateUseCase {
     }
 
     @Override
-    public void translate(Consumer<TranslateResponse> consumerResponse, Consumer<TranslateBase> consumerBase, final String lang, final String text) {
+    public void translate(Consumer<TranslateResponse> consumerResponse, Consumer<TranslateBase> consumerBase, final TranslateQuery translateQuery) {
 
-        Call<TranslateResponse> translateResponseCall = translateApi.getTranslate(lang, text);
+        Call<TranslateResponse> translateResponseCall = translateApi.getTranslate(
+                translateQuery.getLang(), translateQuery.getText());
 
         translateResponseCall.enqueue(new Callback<TranslateResponse>() {
 
@@ -40,10 +44,7 @@ public class YandexTranslateUseCase implements TranslateUseCase {
                 TranslateResponse translateResponse = response.body();
                 if(translateResponse != null) {
 
-                    TranslateBase translateBase = new TranslateBase();
-                    translateBase.lang = lang;
-                    translateBase.textIn = text;
-                    translateBase.textOut = translateResponse.text[0];
+                    TranslateBase translateBase = Mapper.queryResponseToBase(translateQuery, translateResponse.text[0]);
 
                     Observable<TranslateResponse> translateResponseObservable = Observable.just(translateResponse);
                     translateResponseObservable.subscribe(consumerResponse).dispose();

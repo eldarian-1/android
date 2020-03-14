@@ -14,7 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.eldarian.translator.R;
-import com.eldarian.translator.app.TranslateView;
+import com.eldarian.translator.app.types.TranslateView;
 import com.eldarian.translator.presentation.story.StoryActivity;
 
 public class TranslatorActivity extends AppCompatActivity implements TranslatorView, View.OnClickListener {

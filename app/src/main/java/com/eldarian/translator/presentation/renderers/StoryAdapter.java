@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.eldarian.translator.R;
-import com.eldarian.translator.database.TranslateBase;
+import com.eldarian.translator.app.types.TranslateBase;
 
 import java.util.List;
 

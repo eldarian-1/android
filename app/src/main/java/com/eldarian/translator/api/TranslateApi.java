@@ -1,6 +1,7 @@
 package com.eldarian.translator.api;
 
 import com.eldarian.translator.app.AppData;
+import com.eldarian.translator.app.types.TranslateResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -1,6 +1,7 @@
 package com.eldarian.translator.api;
 
-import com.eldarian.translator.database.TranslateBase;
+import com.eldarian.translator.app.types.TranslateBase;
+import com.eldarian.translator.app.types.TranslateResponse;
 
 import io.reactivex.functions.Consumer;
 

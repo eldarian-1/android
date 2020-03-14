@@ -1,4 +1,4 @@
-package com.eldarian.translator.database;
+package com.eldarian.translator.app.types;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

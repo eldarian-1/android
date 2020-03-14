@@ -1,7 +1,7 @@
 package com.eldarian.translator.presentation.threads;
 
 import com.eldarian.translator.app.App;
-import com.eldarian.translator.database.TranslateBase;
+import com.eldarian.translator.app.types.TranslateBase;
 
 public class AddTranslateThread implements Runnable {
 
