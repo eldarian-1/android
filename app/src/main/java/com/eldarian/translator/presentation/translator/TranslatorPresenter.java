@@ -1,5 +1,7 @@
 package com.eldarian.translator.presentation.translator;
 
+import androidx.annotation.NonNull;
+
 import com.eldarian.translator.app.types.Mapper;
 import com.eldarian.translator.app.types.TranslateQuery;
 import com.eldarian.translator.app.types.TranslateResponse;
@@ -16,7 +18,7 @@ public class TranslatorPresenter {
 
     public TranslatorPresenter(){}
 
-    public void getTranslate(TranslateView translateView) {
+    public void getTranslate(@NonNull TranslateView translateView) {
 
         Consumer<TranslateResponse> consumerResponse = new Consumer<TranslateResponse>() {
             @Override
@@ -38,7 +40,7 @@ public class TranslatorPresenter {
 
     }
 
-    public void addTranslateBase(TranslateBase translateBase){
+    public void addTranslateBase(@NonNull TranslateBase translateBase){
         new AddTranslateThread(translateBase);
     }
 
@@ -56,9 +58,11 @@ public class TranslatorPresenter {
     public void attachView(TranslatorView view) {
         this.view = view;
     }
+
     public void detachView() {
         view = null;
     }
+
     public void viewIsReady() {}
 
 }

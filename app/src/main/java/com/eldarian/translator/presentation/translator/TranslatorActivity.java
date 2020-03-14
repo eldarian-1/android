@@ -108,6 +108,7 @@ public class TranslatorActivity extends AppCompatActivity implements TranslatorV
         textOut.setText(text);
     }
 
+    @NonNull
     @Override
     public TranslateView getTranslateView(){
 

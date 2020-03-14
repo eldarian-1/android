@@ -2,7 +2,8 @@ package com.eldarian.translator.api;
 
 import android.util.Log;
 
-import com.eldarian.translator.app.AppData;
+import androidx.annotation.NonNull;
+
 import com.eldarian.translator.app.types.Mapper;
 import com.eldarian.translator.app.types.TranslateBase;
 import com.eldarian.translator.app.types.TranslateQuery;
@@ -15,23 +16,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class YandexTranslateUseCase implements TranslateUseCase {
 
+    private Core core;
     private Retrofit retrofit;
     private TranslateApi translateApi;
 
     public YandexTranslateUseCase(){
-        retrofit = new Retrofit.Builder()
-                .baseUrl(AppData.API_URI)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        translateApi = retrofit.create(TranslateApi.class);
+        core = Core.getCore();
+        retrofit = core.getRetrofit();
+        translateApi = core.getTranslateApi();
     }
 
     @Override
-    public void translate(Consumer<TranslateResponse> consumerResponse, Consumer<TranslateBase> consumerBase, final TranslateQuery translateQuery) {
+    public void translate(@NonNull Consumer<TranslateResponse> consumerResponse,
+                          @NonNull Consumer<TranslateBase> consumerBase, @NonNull final TranslateQuery translateQuery) {
 
         Call<TranslateResponse> translateResponseCall = translateApi.getTranslate(
                 translateQuery.getLang(), translateQuery.getText());

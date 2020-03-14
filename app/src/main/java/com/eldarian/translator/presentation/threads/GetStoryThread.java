@@ -1,5 +1,7 @@
 package com.eldarian.translator.presentation.threads;
 
+import androidx.annotation.NonNull;
+
 import com.eldarian.translator.app.App;
 import com.eldarian.translator.presentation.story.StoryView;
 
@@ -10,7 +12,7 @@ public class GetStoryThread implements Runnable {
     private Thread thread;
     private StoryView view;
 
-    public GetStoryThread(StoryView view){
+    public GetStoryThread(@NonNull StoryView view){
         this.thread = new Thread(this, "story");
         this.view = view;
         this.thread.start();

@@ -2,6 +2,7 @@ package com.eldarian.translator.app;
 
 import android.app.Application;
 
+import androidx.annotation.NonNull;
 import androidx.room.Room;
 
 import com.eldarian.translator.database.AppDataBase;
@@ -20,10 +21,12 @@ public class App extends Application {
                 .build();
     }
 
+    @NonNull
     public static App getInstance() {
         return instance;
     }
 
+    @NonNull
     public AppDataBase getDatabase() {
         return database;
     }

@@ -1,5 +1,6 @@
 package com.eldarian.translator.database;
 
+import androidx.annotation.NonNull;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -11,6 +12,7 @@ import java.util.List;
 @Dao
 public interface TranslateBaseDao {
 
+    @NonNull
     @Query("SELECT * FROM translatebase")
     List<TranslateBase> getAll();
 

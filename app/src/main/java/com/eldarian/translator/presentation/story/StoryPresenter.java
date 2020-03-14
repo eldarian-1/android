@@ -20,9 +20,11 @@ public class StoryPresenter {
     void attachView(StoryView view) {
         this.view = view;
     }
+
     public void detachView() {
         view = null;
     }
+
     void viewIsReady() {}
 
 }

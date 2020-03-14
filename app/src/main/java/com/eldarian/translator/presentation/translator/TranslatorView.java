@@ -1,5 +1,7 @@
 package com.eldarian.translator.presentation.translator;
 
+import androidx.annotation.NonNull;
+
 import com.eldarian.translator.app.types.TranslateView;
 
 public interface TranslatorView {
@@ -10,6 +12,8 @@ public interface TranslatorView {
     void setLangTo(int position);
     void setTextIn(String text);
     void setTextOut(String text);
+
+    @NonNull
     TranslateView getTranslateView();
 
 }

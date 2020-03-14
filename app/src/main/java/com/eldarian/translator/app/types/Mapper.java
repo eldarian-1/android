@@ -1,8 +1,11 @@
 package com.eldarian.translator.app.types;
 
+import androidx.annotation.NonNull;
+
 public class Mapper {
 
-    public static TranslateBase queryResponseToBase(TranslateQuery translateQuery, TranslateResponse translateResponse){
+    @NonNull
+    public static TranslateBase queryResponseToBase(@NonNull TranslateQuery translateQuery, @NonNull TranslateResponse translateResponse){
         TranslateBase translateBase = new TranslateBase();
         translateBase.lang = translateQuery.getLang();
         translateBase.textIn = translateQuery.getText();
@@ -10,7 +13,8 @@ public class Mapper {
         return translateBase;
     }
 
-    public static TranslateQuery viewToQuery(TranslateView translateView){
+    @NonNull
+    public static TranslateQuery viewToQuery(@NonNull TranslateView translateView){
         TranslateQuery translateQuery = new TranslateQuery();
         translateQuery.setLang(translateView.getLangFrom() + "-" + translateView.getLangTo());
         translateQuery.setText(translateView.getTextIn());
