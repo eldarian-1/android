@@ -14,6 +14,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.eldarian.translator.R;
+import com.eldarian.translator.api.ShowcaseRepositoryImpl;
+import com.eldarian.translator.api.ShowcaseUseCaseImpl;
 import com.eldarian.translator.app.types.TranslateView;
 import com.eldarian.translator.presentation.story.StoryActivity;
 
@@ -45,7 +47,7 @@ public class TranslatorActivity extends AppCompatActivity implements TranslatorV
 
         buttonTranslate.setOnClickListener(this);
 
-        presenter = new TranslatorPresenter();
+        presenter = new TranslatorPresenter(new ShowcaseUseCaseImpl(new ShowcaseRepositoryImpl()));
         presenter.attachView(this);
         presenter.viewIsReady();
     }

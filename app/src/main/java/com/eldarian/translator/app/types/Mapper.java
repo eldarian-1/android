@@ -5,11 +5,11 @@ import androidx.annotation.NonNull;
 public class Mapper {
 
     @NonNull
-    public static TranslateBase queryResponseToBase(@NonNull TranslateQuery translateQuery, @NonNull TranslateResponse translateResponse){
+    public static TranslateBase viewResponseToBase(@NonNull TranslateView translateView, @NonNull String textOut){
         TranslateBase translateBase = new TranslateBase();
-        translateBase.lang = translateQuery.getLang();
-        translateBase.textIn = translateQuery.getText();
-        translateBase.textOut = translateResponse.text[0];
+        translateBase.lang = translateView.getLangFrom() + "-" + translateView.getLangTo();
+        translateBase.textIn = translateView.getTextIn();
+        translateBase.textOut = textOut;
         return translateBase;
     }
 

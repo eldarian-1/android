@@ -5,14 +5,15 @@ import androidx.annotation.NonNull;
 import com.eldarian.translator.app.AppData;
 import com.eldarian.translator.app.types.TranslateResponse;
 
-import retrofit2.Call;
+
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface TranslateApi {
+public interface ShowcaseService {
 
     @NonNull
-    @GET("translate?key=" + AppData.API_KEY)
-    Call<TranslateResponse> getTranslate(@Query("lang") String lang, @Query("text") String text);
+    @GET(value = "translate?key=" + AppData.API_KEY)
+    Observable<TranslateResponse> getTranslate(@Query("lang") String lang, @Query("text") String text);
 
 }

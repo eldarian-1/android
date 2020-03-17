@@ -1,47 +1,43 @@
 package com.eldarian.translator.presentation.translator;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
+import com.eldarian.translator.api.ShowcaseUseCase;
 import com.eldarian.translator.app.types.Mapper;
-import com.eldarian.translator.app.types.TranslateQuery;
-import com.eldarian.translator.app.types.TranslateResponse;
-import com.eldarian.translator.api.YandexTranslateUseCase;
 import com.eldarian.translator.app.types.TranslateView;
 import com.eldarian.translator.app.types.TranslateBase;
 import com.eldarian.translator.presentation.threads.AddTranslateThread;
 
-import io.reactivex.functions.Consumer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class TranslatorPresenter {
 
     private TranslatorView view;
+    private ShowcaseUseCase showcaseUseCase;
+    private Disposable translateDisposable;
 
-    public TranslatorPresenter(){}
+    public TranslatorPresenter(ShowcaseUseCase showcaseUseCase){
+        this.showcaseUseCase = showcaseUseCase;
+    }
 
     public void getTranslate(@NonNull TranslateView translateView) {
 
-        Consumer<TranslateResponse> consumerResponse = new Consumer<TranslateResponse>() {
-            @Override
-            public void accept(TranslateResponse item) throws Exception {
-                setTextOut(item.text[0]);
-            }
-        };
+        translateDisposable =  showcaseUseCase.getTranslate(Mapper.viewToQuery(translateView))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        textOut -> {
+                            view.setTextOut(textOut);
+                            TranslateBase translateBase = Mapper.viewResponseToBase(translateView, textOut);
+                            new AddTranslateThread(translateBase);
+                            },
+                        throwable -> Log.d("EldarianLog", throwable.getMessage())
+                );
 
-        Consumer<TranslateBase> consumerBase = new Consumer<TranslateBase>() {
-            @Override
-            public void accept(TranslateBase item) throws Exception {
-                addTranslateBase(item);
-            }
-        };
-
-        YandexTranslateUseCase yandexQuery = new YandexTranslateUseCase();
-        TranslateQuery translateQuery = Mapper.viewToQuery(translateView);
-        yandexQuery.translate(consumerResponse, consumerBase, translateQuery);
-
-    }
-
-    public void addTranslateBase(@NonNull TranslateBase translateBase){
-        new AddTranslateThread(translateBase);
     }
 
     public void setTextOut(String text){
@@ -64,5 +60,4 @@ public class TranslatorPresenter {
     }
 
     public void viewIsReady() {}
-
 }
