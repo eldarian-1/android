@@ -2,20 +2,21 @@ package com.eldarian.translator.api;
 
 import com.eldarian.translator.app.AppData;
 
+import java.io.IOException;
+
+import okhttp3.Interceptor;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Core {
+class Core {
 
-    public static Core core;
+    private static Core core;
+    private final ShowcaseService showcaseService;
 
-    private Retrofit retrofit;
-    private ShowcaseService showcaseService;
-
-    private Core(){
-
-        retrofit = new Retrofit.Builder()
+    private Core() {
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(AppData.API_URI)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -24,17 +25,13 @@ public class Core {
         showcaseService = retrofit.create(ShowcaseService.class);
     }
 
-    public static Core getCore(){
-        if(core == null)
+    static Core getCore() {
+        if (core == null)
             core = new Core();
         return core;
     }
 
-    public Retrofit getRetrofit(){
-        return retrofit;
-    }
-
-    public ShowcaseService getShowcaseService() {
+    ShowcaseService getShowcaseService() {
         return showcaseService;
     }
 }

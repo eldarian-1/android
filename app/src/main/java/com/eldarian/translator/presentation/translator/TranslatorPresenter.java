@@ -1,48 +1,36 @@
 package com.eldarian.translator.presentation.translator;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.eldarian.translator.api.ShowcaseUseCase;
+import com.eldarian.translator.app.App;
 import com.eldarian.translator.app.types.Mapper;
 import com.eldarian.translator.app.types.TranslateView;
-import com.eldarian.translator.app.types.TranslateBase;
-import com.eldarian.translator.presentation.threads.AddTranslateThread;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.internal.observers.EmptyCompletableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class TranslatorPresenter {
 
     private TranslatorView view;
     private ShowcaseUseCase showcaseUseCase;
-    private Disposable translateDisposable;
 
-    public TranslatorPresenter(ShowcaseUseCase showcaseUseCase){
+    public TranslatorPresenter(ShowcaseUseCase showcaseUseCase) {
         this.showcaseUseCase = showcaseUseCase;
     }
 
     public void getTranslate(@NonNull TranslateView translateView) {
-
-        translateDisposable =  showcaseUseCase.getTranslate(Mapper.viewToQuery(translateView))
+        showcaseUseCase.getTranslate(Mapper.viewToQuery(translateView))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        textOut -> {
-                            view.setTextOut(textOut);
-                            TranslateBase translateBase = Mapper.viewResponseToBase(translateView, textOut);
-                            new AddTranslateThread(translateBase);
-                            },
-                        throwable -> Log.d("EldarianLog", throwable.getMessage())
-                );
-
+                .doOnNext(textOut -> view.setTextOut(textOut))
+                .observeOn(Schedulers.io())
+                .map(textOut -> Mapper.viewResponseToBase(translateView, textOut))
+                .flatMapCompletable(translateBase -> App.getInstance().getDatabase().translateDao().insert(translateBase))
+                .subscribe(new EmptyCompletableObserver());
     }
 
-    public void setTextOut(String text){
-        view.setTextOut(text);
-    }
 
     public void clearField() {
         view.setLangFrom(0);
@@ -59,5 +47,6 @@ public class TranslatorPresenter {
         view = null;
     }
 
-    public void viewIsReady() {}
+    public void viewIsReady() {
+    }
 }

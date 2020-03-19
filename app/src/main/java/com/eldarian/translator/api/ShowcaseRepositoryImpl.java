@@ -11,14 +11,10 @@ import retrofit2.Retrofit;
 
 public class ShowcaseRepositoryImpl implements ShowcaseRepository {
 
-    private Core core;
-    private Retrofit retrofit;
-    private ShowcaseService showcaseService;
+    private final ShowcaseService showcaseService;
 
     public ShowcaseRepositoryImpl(){
-        core = Core.getCore();
-        retrofit = core.getRetrofit();
-        showcaseService = core.getShowcaseService();
+        showcaseService = Core.getCore().getShowcaseService();
     }
 
     @Override

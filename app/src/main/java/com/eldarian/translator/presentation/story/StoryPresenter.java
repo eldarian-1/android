@@ -1,30 +1,30 @@
 package com.eldarian.translator.presentation.story;
 
-import com.eldarian.translator.presentation.threads.DeleteStoryThread;
-import com.eldarian.translator.presentation.threads.GetStoryThread;
+import com.eldarian.translator.app.App;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.internal.observers.EmptyCompletableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class StoryPresenter {
 
     private StoryView view;
 
-    public StoryPresenter(){}
-
-    public void setTranslateList() {
-        new GetStoryThread(view);
-    }
-
-    void clearTranslations() {
-        new DeleteStoryThread();
-    }
-
     void attachView(StoryView view) {
         this.view = view;
     }
 
-    public void detachView() {
-        view = null;
+    void setTranslateList() {
+        App.getInstance().getDatabase().translateDao().getAll()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(data -> view.setTranslateList(data))
+                .subscribe();
     }
 
-    void viewIsReady() {}
-
+    void clearTranslations() {
+        App.getInstance().getDatabase().translateDao().dropData()
+                .subscribeOn(Schedulers.io())
+                .subscribe(new EmptyCompletableObserver());
+    }
 }

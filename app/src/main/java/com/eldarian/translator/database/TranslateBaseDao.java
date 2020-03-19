@@ -9,17 +9,20 @@ import com.eldarian.translator.app.types.TranslateBase;
 
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+
 @Dao
 public interface TranslateBaseDao {
 
     @NonNull
     @Query("SELECT * FROM translatebase")
-    List<TranslateBase> getAll();
+    Observable<List<TranslateBase>> getAll();
 
     @Query("DELETE FROM translatebase")
-    void dropData();
+    Completable dropData();
 
     @Insert
-    void insert(TranslateBase translateBase);
+    Completable insert(TranslateBase translateBase);
 
 }

@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.eldarian.translator.R;
+import com.eldarian.translator.app.types.TranslateBase;
 import com.eldarian.translator.app.types.TranslateView;
 import com.eldarian.translator.presentation.renderers.StoryAdapter;
 
@@ -32,7 +33,6 @@ public class StoryActivity extends AppCompatActivity implements StoryView {
         recyclerStory = findViewById(R.id.recycler_story);
         presenter = new StoryPresenter();
         presenter.attachView(this);
-        presenter.viewIsReady();
         presenter.setTranslateList();
     }
 
@@ -61,9 +61,11 @@ public class StoryActivity extends AppCompatActivity implements StoryView {
     }
 
     @Override
-    public void setTranslateList(List list){
+    public void setTranslateList(List<TranslateBase> list){
+        Thread.currentThread().getName();
         StoryAdapter adapter = new StoryAdapter(list);
         recyclerStory.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
 }
