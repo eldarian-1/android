@@ -2,6 +2,7 @@ package com.eldarian.translator.database;
 
 import androidx.annotation.NonNull;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -20,6 +21,7 @@ public interface TranslateBaseDao {
     Observable<List<TranslateBase>> getAll();
 
     @Query("DELETE FROM translatebase")
+    //@Delete("translatebase")
     Completable dropData();
 
     @Insert

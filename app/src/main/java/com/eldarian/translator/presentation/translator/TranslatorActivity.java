@@ -67,7 +67,7 @@ public class TranslatorActivity extends AppCompatActivity implements TranslatorV
                 break;
             }
             case R.id.cl_field:{
-                presenter.clearField();
+                clearFields();
                 break;
             }
         }
@@ -91,18 +91,10 @@ public class TranslatorActivity extends AppCompatActivity implements TranslatorV
     }
 
     @Override
-    public void setLangFrom(int position){
-        langFrom.setSelection(position);
-    }
-
-    @Override
-    public void setLangTo(int position){
-        langTo.setSelection(position);
-    }
-
-    @Override
-    public void setTextIn(String text){
-        textIn.setText(text);
+    public void clearFields(){
+        langFrom.setSelection(0);
+        langTo.setSelection(0);
+        textIn.setText("");
     }
 
     @Override

@@ -31,14 +31,6 @@ public class TranslatorPresenter {
                 .subscribe(new EmptyCompletableObserver());
     }
 
-
-    public void clearField() {
-        view.setLangFrom(0);
-        view.setLangTo(0);
-        view.setTextIn("");
-        view.setTextOut("");
-    }
-
     public void attachView(TranslatorView view) {
         this.view = view;
     }
