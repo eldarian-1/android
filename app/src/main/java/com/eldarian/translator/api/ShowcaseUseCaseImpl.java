@@ -1,7 +1,6 @@
 package com.eldarian.translator.api;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.eldarian.translator.app.types.TranslateQuery;
 import com.eldarian.translator.app.types.TranslateResponse;

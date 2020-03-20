@@ -47,9 +47,7 @@ public class TranslatorActivity extends AppCompatActivity implements TranslatorV
 
         buttonTranslate.setOnClickListener(this);
 
-        presenter = new TranslatorPresenter(new ShowcaseUseCaseImpl(new ShowcaseRepositoryImpl()));
-        presenter.attachView(this);
-        presenter.viewIsReady();
+        presenter = new TranslatorPresenter(this);
     }
 
     @Override
@@ -87,7 +85,6 @@ public class TranslatorActivity extends AppCompatActivity implements TranslatorV
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        presenter.detachView();
     }
 
     @Override

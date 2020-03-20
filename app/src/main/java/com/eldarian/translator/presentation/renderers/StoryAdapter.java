@@ -7,13 +7,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.eldarian.translator.R;
 import com.eldarian.translator.app.types.TranslateBase;
 
 import java.util.List;
 
-public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> {
+public class StoryAdapter extends Adapter<StoryAdapter.ViewHolder> {
 
     private List<TranslateBase> translateBaseList;
 

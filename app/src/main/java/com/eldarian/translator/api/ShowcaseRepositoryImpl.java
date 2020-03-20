@@ -7,8 +7,6 @@ import com.eldarian.translator.app.types.TranslateResponse;
 
 import io.reactivex.Observable;
 
-import retrofit2.Retrofit;
-
 public class ShowcaseRepositoryImpl implements ShowcaseRepository {
 
     private final ShowcaseService showcaseService;

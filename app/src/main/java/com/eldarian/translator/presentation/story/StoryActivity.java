@@ -31,8 +31,7 @@ public class StoryActivity extends AppCompatActivity implements StoryView {
     @Override
     public void init(){
         recyclerStory = findViewById(R.id.recycler_story);
-        presenter = new StoryPresenter();
-        presenter.attachView(this);
+        presenter = new StoryPresenter(this);
         presenter.setTranslateList();
     }
 

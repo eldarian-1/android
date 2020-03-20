@@ -21,7 +21,6 @@ public interface TranslateBaseDao {
     Observable<List<TranslateBase>> getAll();
 
     @Query("DELETE FROM translatebase")
-    //@Delete("translatebase")
     Completable dropData();
 
     @Insert

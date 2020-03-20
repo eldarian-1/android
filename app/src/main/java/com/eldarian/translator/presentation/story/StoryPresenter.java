@@ -1,6 +1,9 @@
 package com.eldarian.translator.presentation.story;
 
+import android.util.Log;
+
 import com.eldarian.translator.app.App;
+import com.eldarian.translator.presentation.translator.TranslatorView;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.internal.observers.EmptyCompletableObserver;
@@ -10,7 +13,7 @@ public class StoryPresenter {
 
     private StoryView view;
 
-    void attachView(StoryView view) {
+    public StoryPresenter(StoryView view) {
         this.view = view;
     }
 
